@@ -33,11 +33,16 @@ impl Swish {
     }
 
     fn handle(&mut self, stream: &mut TcpStream) {
-        let req = parse(stream);
-        // println!("{:?}", req);
-        let handler = self.search(&req);
-        let contents = response(handler, req);
-        write(&contents, stream)
+        match parse(stream) {
+            Ok(result) => {
+                let handler = self.search(&result);
+                let contents = response(handler, result);
+                write(&contents, stream)
+            },
+            Err(error) => {
+                write(&error.msg, stream)
+            },
+        };
     }
 
     pub fn search(&mut self, req: &Request) -> Handler {

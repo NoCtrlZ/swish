@@ -42,10 +42,10 @@ mod tests {
         assert_eq!(res3, "invalid request");
     }
 
-    // #[test]
-    // fn server_setup_test() {
-    //     swish2().bish()
-    // }
+    #[test]
+    fn server_setup_test() {
+        swish2().bish()
+    }
 
     fn path_handler(url: &str) -> String {
         "path request".to_string()
