@@ -36,13 +36,14 @@ impl Swish {
         let req = parse(stream);
         // println!("{:?}", req);
         let handler = self.search(&req);
-        self.response(stream, handler, req)
+        let contents = self.response(handler, req);
+        self.write(&contents, stream)
     }
 
     fn search(&mut self, req: &Request) -> Handler {
         for route in &self.router.routes {
             if match_with(&req, route) {
-                route.handler
+                return route.handler
             } else {
                 continue;
             };
@@ -50,10 +51,12 @@ impl Swish {
         not_found
     }
 
-    fn response(&mut self, stream: &mut TcpStream, handler: Handler, req: Request) {
-        let response = handler(&req.path);
-        println!("response is here");
-        stream.write(response.as_bytes()).expect("fail to write bytes");
+    fn response(&mut self, handler: Handler, req: Request) -> String {
+        handler(&req.path)
+    }
+
+    fn write(&mut self, contents: &str, stream: &mut TcpStream) {
+        stream.write(contents.as_bytes()).expect("fail to write bytes");
         stream.flush().expect("fail to flush stream");
     }
 }

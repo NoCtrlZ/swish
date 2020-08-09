@@ -29,6 +29,11 @@ mod tests {
         let clinet = Client::new(swish2());
     }
 
+    #[test]
+    fn server_start() {
+        swish2().bish()
+    }
+
     fn test_handler(url: &str) -> String {
         url.to_string()
     }
