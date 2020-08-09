@@ -11,7 +11,7 @@ There are three rules I have when making this web flamework.
 Sometime other web flamework can't be built because it has `dependencies with nightly modules`. Do we have to be an OSS committer? WTF. And we don't prefer to use left-pad package. I'd like to say `we are just programmer not OSS committer nor fucking copy paster!`
 ## Loadmap
 - [x] Basic Test Server
-- [ ] Client For Test
+- [x] Client For Test
 - [ ] Static Route Matcher
 - [ ] Dynamic Route Matcher
 - [ ] Route Register

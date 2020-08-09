@@ -1,6 +1,7 @@
 use std::io::prelude::*;
 use std::net::TcpStream;
 use crate::request::Request;
+use crate::entities::buffer_to_string;
 
 pub fn parse(stream: &mut TcpStream) -> Request {
     let raw_data = convert_buffer_to_string(stream);
@@ -32,10 +33,4 @@ fn convert_buffer_to_string(stream: &mut TcpStream) -> String {
     stream.read(&mut buffer).expect("fail to read buffer from stream");
     // println!("{:?}", &buffer[..]);
     buffer_to_string(&buffer[..])
-}
-
-fn buffer_to_string(buffer: &[u8]) -> String {
-    String::from_utf8_lossy(&buffer[..])
-    .trim_matches(char::from(0))
-    .to_string()
 }

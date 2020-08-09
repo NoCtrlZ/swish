@@ -5,6 +5,8 @@ mod parser;
 mod request;
 mod client;
 mod error;
+mod entities;
+mod response;
 
 use crate::swish::Swish;
 use crate::client::Client;
@@ -13,43 +15,37 @@ use crate::client::Client;
 mod tests {
     use super::*;
     #[test]
-    fn router_test() {
-        let mut router = router::Router::new();
-        router.register("/path", "GET", test_handler);
-    }
-
-    #[test]
-    fn server_test() {
-        let mut swish2 = swish2();
-        assert_eq!(swish2.router.routes.len(), 1);
-    }
-
-    #[test]
-    fn client_test() {
+    fn simple_path_test() {
         let mut client = Client::new(swish2());
         let res = client.get("/path");
-        assert_eq!(res, "/path");
+        assert_eq!(res, "path request");
     }
 
     #[test]
-    fn client_not_fount_test() {
+    fn not_fount_test() {
         let mut client = Client::new(swish2());
         let res = client.get("/no_route");
         assert_eq!(res, "/no_route is not found");
     }
 
-    // #[test]
-    // fn server_start() {
-    //     swish2().bish()
-    // }
+    #[test]
+    fn invalid_path_test() {
+        let mut client = Client::new(swish2());
+        let res = client.get("shouldn't be return *");
+    }
 
-    fn test_handler(url: &str) -> String {
-        url.to_string()
+    #[test]
+    fn server_setup_test() {
+        swish2().bish()
+    }
+
+    fn path_handler(url: &str) -> String {
+        "path request".to_string()
     }
 
     fn swish2() -> Swish {
         let mut swish = Swish::new();
-        swish.swish("/path", "GET", test_handler);
+        swish.swish("/path", "GET", path_handler);
         swish
     }
 }

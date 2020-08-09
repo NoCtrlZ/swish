@@ -1,4 +1,5 @@
 use crate::swish::Swish;
+use crate::response::response;
 use crate::request::Request;
 
 pub struct Client {
@@ -18,6 +19,6 @@ impl Client {
             path: path.to_string(),
         };
         let handler = self.server.search(&req);
-        self.server.response(handler, req)
+        response(handler, req)
     }
 }

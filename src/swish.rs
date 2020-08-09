@@ -3,6 +3,7 @@ use crate::parser::parse;
 use crate::router::{Router, Handler};
 use crate::request::Request;
 use crate::error::not_found;
+use crate::response::{response, write};
 
 use std::net::{TcpStream, TcpListener};
 use std::io::prelude::*;
@@ -36,8 +37,8 @@ impl Swish {
         let req = parse(stream);
         // println!("{:?}", req);
         let handler = self.search(&req);
-        let contents = self.response(handler, req);
-        self.write(&contents, stream)
+        let contents = response(handler, req);
+        write(&contents, stream)
     }
 
     pub fn search(&mut self, req: &Request) -> Handler {
@@ -50,13 +51,5 @@ impl Swish {
         }
         not_found
     }
-
-    pub fn response(&mut self, handler: Handler, req: Request) -> String {
-        handler(&req.path)
-    }
-
-    fn write(&mut self, contents: &str, stream: &mut TcpStream) {
-        stream.write(contents.as_bytes()).expect("fail to write bytes");
-        stream.flush().expect("fail to flush stream");
-    }
 }
+
