@@ -14,8 +14,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: install dependencies
+    - name: Install dependencies
       run: cargo install --force cargo-make
 
-    - name: unit tests
+    - name: Unit tests
       run: cargo test --verbose
