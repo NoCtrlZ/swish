@@ -1,0 +1,17 @@
+name: Rust Cargo Test
+
+on:
+  pull_request:
+    branches: [ master, develop ]
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: unit tests
+      run: cargo test --verbose
