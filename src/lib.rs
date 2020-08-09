@@ -18,7 +18,7 @@ mod tests {
     #[test]
     fn router_test() {
         let mut router = router::Router::new();
-        router.register("path", test_handler);
+        router.register("/path", "GET", test_handler);
     }
 
     #[test]
@@ -34,7 +34,7 @@ mod tests {
 
     fn swish2() -> Swish {
         let mut swish = Swish::new();
-        swish.swish("/path", test_handler);
+        swish.swish("/path", "GET", test_handler);
         swish
     }
 }

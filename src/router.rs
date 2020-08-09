@@ -2,6 +2,7 @@ pub type Handler = fn(url: &str) -> String;
 
 pub struct Route {
     pub path: String,
+    pub method: String,
     pub handler: Handler,
 }
 
@@ -14,9 +15,10 @@ impl Router {
         Router { routes: Vec::new() }
     }
 
-    pub fn register(&mut self, path: &str, handler: Handler) {
+    pub fn register(&mut self, path: &str, method: &str, handler: Handler) {
         let route = Route {
             path: path.to_string(),
+            method: method.to_string(),
             handler: handler,
         };
         self.routes.push(route)
