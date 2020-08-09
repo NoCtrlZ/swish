@@ -1,3 +1,5 @@
+use crate::entities::is_route_url;
+
 pub type Handler = fn(&str) -> String;
 
 pub struct Route {
@@ -16,6 +18,9 @@ impl Router {
     }
 
     pub fn register(&mut self, path: &str, method: &str, handler: Handler) {
+        if !is_route_url(&path) {
+            panic!("invalid routing");
+        }
         let route = Route {
             path: path.to_string(),
             method: method.to_string(),
