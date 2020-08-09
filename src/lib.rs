@@ -4,6 +4,7 @@ mod swish;
 mod parser;
 mod request;
 mod client;
+mod error;
 
 use crate::swish::Swish;
 use crate::client::Client;
@@ -11,12 +12,6 @@ use crate::client::Client;
 #[cfg(test)]
 mod tests {
     use super::*;
-    #[test]
-    fn matcher_test() {
-        let matched = matcher::match_with("this is test");
-        assert_eq!(matched, "this is test");
-    }
-
     #[test]
     fn router_test() {
         let mut router = router::Router::new();

@@ -1,4 +1,4 @@
-pub type Handler = fn(url: &str) -> String;
+pub type Handler = fn(&str) -> String;
 
 pub struct Route {
     pub path: String,
