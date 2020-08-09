@@ -1,7 +1,6 @@
 mod matcher;
 mod router;
 mod swish;
-mod parser;
 mod request;
 mod client;
 mod error;

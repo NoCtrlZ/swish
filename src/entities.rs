@@ -1,4 +1,6 @@
 use regex::Regex;
+use std::io::prelude::*;
+use std::net::TcpStream;
 
 pub fn buffer_to_string(buffer: &[u8]) -> String {
     String::from_utf8_lossy(&buffer[..])
@@ -14,6 +16,14 @@ pub fn is_route_url(url: &str) -> bool {
 pub fn is_request_url(url: &str) -> bool {
     let url_regex = Regex::new(r"^/[\w]+(/[\w -.!?=()])*").unwrap();
     url_regex.is_match(&url)
+}
+
+pub fn convert_buffer_to_string(stream: &mut TcpStream) -> String {
+    // content type length limitation is 1000
+    let mut buffer = [0; 1000];
+    stream.read(&mut buffer).expect("fail to read buffer from stream");
+    // println!("{:?}", &buffer[..]);
+    buffer_to_string(&buffer[..])
 }
 
 #[cfg(test)]

@@ -1,7 +1,6 @@
 use crate::matcher::match_with;
-use crate::parser::parse;
 use crate::router::{Router, Handler};
-use crate::request::Request;
+use crate::request::{Request, parse};
 use crate::error::not_found;
 use crate::response::{response, write};
 
