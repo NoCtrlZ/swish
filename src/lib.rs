@@ -21,12 +21,18 @@ mod tests {
 
     #[test]
     fn server_test() {
-        let mut swish = Swish::new();
-        swish.swish("path", test_handler);
-        assert_eq!(swish.router.routes.len(), 1);
+        let mut swish2 = swish2();
+        swish2.bish();
+        assert_eq!(swish2.router.routes.len(), 1);
     }
 
     fn test_handler(url: &str) -> String {
         url.to_string()
+    }
+
+    fn swish2() -> Swish {
+        let mut swish = Swish::new();
+        swish.swish("/path", test_handler);
+        swish
     }
 }

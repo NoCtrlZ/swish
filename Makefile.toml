@@ -2,5 +2,5 @@
 description = "Run Swish Server"
 script = ['''
 #!/usr/bin/env bash
-cargo test
+cargo test -- --nocapture
 ''']
