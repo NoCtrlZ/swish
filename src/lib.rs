@@ -1,6 +1,7 @@
 mod matcher;
 mod router;
 mod swish;
+mod parser;
 
 use crate::swish::Swish;
 

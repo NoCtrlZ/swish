@@ -1,9 +1,10 @@
-use crate::router;
 use crate::matcher;
+use crate::parser::parse;
+use crate::router::{Router, Handler};
+
 use std::net::{TcpStream, TcpListener};
 use std::io::prelude::*;
 
-use crate::router::{Router, Handler};
 
 pub struct Swish {
     pub router: Router,
@@ -30,6 +31,7 @@ impl Swish {
     }
 
     fn handle(&mut self, stream: &mut TcpStream) {
-        println!("{:?}", stream);
+        let req = parse(stream);
+        println!("{:?}", req);
     }
 }
