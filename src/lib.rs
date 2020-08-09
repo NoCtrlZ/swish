@@ -2,6 +2,8 @@ mod matcher;
 mod router;
 mod swish;
 
+use crate::swish::Swish;
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -19,7 +21,9 @@ mod tests {
 
     #[test]
     fn server_test() {
-        let swish = swish::swish();
+        let mut swish = Swish::new();
+        swish.swish("path", test_handler);
+        assert_eq!(swish.router.routes.len(), 1);
     }
 
     fn test_handler(url: &str) -> String {
