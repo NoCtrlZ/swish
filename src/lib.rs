@@ -1,7 +1,11 @@
+mod matcher;
+
 #[cfg(test)]
 mod tests {
+    use super::*;
     #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
+    fn matcher_test() {
+        let matched = matcher::match_with("this is test");
+        assert_eq!(matched, "this is test");
     }
 }
