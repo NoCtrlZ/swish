@@ -26,13 +26,22 @@ mod tests {
 
     #[test]
     fn client_test() {
-        let clinet = Client::new(swish2());
+        let mut client = Client::new(swish2());
+        let res = client.get("/path");
+        assert_eq!(res, "/path");
     }
 
     #[test]
-    fn server_start() {
-        swish2().bish()
+    fn client_not_fount_test() {
+        let mut client = Client::new(swish2());
+        let res = client.get("/no_route");
+        assert_eq!(res, "/no_route is not found");
     }
+
+    // #[test]
+    // fn server_start() {
+    //     swish2().bish()
+    // }
 
     fn test_handler(url: &str) -> String {
         url.to_string()
