@@ -8,7 +8,7 @@ There are three rules I have when making this web flamework.
 - Don't have extra module
 - Don't be heavy
 ### What I want to say🏴‍☠️
-Sometime other web flamework can't be built because it has `dependencies with nightly modules`. Do we have to be an OSS committer? WTF. And we don't prefer to use left-pad package. I'd like to say `we are just programmer not OSS committer nor fucking copy paster!`
+Sometime other web flamework can't be built because it has `dependencies with nightly modules`. Do we need to be an OSS committer? WTF! And we also don't prefer to use left-pad packages. I'd like to say `we are programmer not OSS committer nor fucking copy paster!`
 ## Loadmap
 - [x] Basic Test Server
 - [x] Client For Test
