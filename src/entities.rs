@@ -37,12 +37,14 @@ mod tests {
         let res4 = is_route_url("/h!.()-_:");
         let res5 = is_route_url("/=?");
         let res6 = is_route_url("/");
+        let res7 = is_route_url("");
         assert_eq!(res1, true);
         assert_eq!(res2, false);
         assert_eq!(res3, false);
         assert_eq!(res4, true);
         assert_eq!(res5, false);
         assert_eq!(res6, false);
+        assert_eq!(res7, false);
     }
 
     #[test]
@@ -53,11 +55,13 @@ mod tests {
         let res4 = is_request_url("/test?var=true");
         let res5 = is_request_url("/!.()-:l");
         let res6 = is_request_url("/");
+        let res7 = is_request_url("");
         assert_eq!(res1, true);
         assert_eq!(res2, false);
         assert_eq!(res3, false);
         assert_eq!(res4, true);
         assert_eq!(res5, false);
         assert_eq!(res6, false);
+        assert_eq!(res7, false);
     }
 }
