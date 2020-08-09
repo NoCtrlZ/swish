@@ -11,6 +11,8 @@ mod response;
 use crate::swish::Swish;
 use crate::client::Client;
 
+extern crate regex;
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -35,9 +37,11 @@ mod tests {
         let mut client = Client::new(swish2());
         let res1 = client.get("shouldn't be return *");
         let res2 = client.get("//gsaj");
+        let res3 = client.get("");
         assert_eq!(res1, "invalid request");
         assert_eq!(res2, "invalid request");
-    };
+        assert_eq!(res3, "invalid request");
+    }
 
     // #[test]
     // fn server_setup_test() {
