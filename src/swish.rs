@@ -40,7 +40,7 @@ impl Swish {
         self.write(&contents, stream)
     }
 
-    fn search(&mut self, req: &Request) -> Handler {
+    pub fn search(&mut self, req: &Request) -> Handler {
         for route in &self.router.routes {
             if match_with(&req, route) {
                 return route.handler
@@ -51,7 +51,7 @@ impl Swish {
         not_found
     }
 
-    fn response(&mut self, handler: Handler, req: Request) -> String {
+    pub fn response(&mut self, handler: Handler, req: Request) -> String {
         handler(&req.path)
     }
 
