@@ -3,8 +3,10 @@ mod router;
 mod swish;
 mod parser;
 mod request;
+mod client;
 
 use crate::swish::Swish;
+use crate::client::Client;
 
 #[cfg(test)]
 mod tests {
@@ -24,8 +26,12 @@ mod tests {
     #[test]
     fn server_test() {
         let mut swish2 = swish2();
-        swish2.bish();
         assert_eq!(swish2.router.routes.len(), 1);
+    }
+
+    #[test]
+    fn client_test() {
+        let clinet = Client::new(swish2());
     }
 
     fn test_handler(url: &str) -> String {
