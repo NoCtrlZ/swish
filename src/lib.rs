@@ -16,6 +16,13 @@ extern crate regex;
 mod tests {
     use super::*;
     #[test]
+    #[should_panic]
+    fn register_routing_test() {
+        let mut swish = Swish::new();
+        swish.swish("/=?", "GET", path_handler);
+    }
+
+    #[test]
     fn simple_path_test() {
         let mut client = Client::new(swish2());
         let res1 = client.get("/path");
@@ -42,6 +49,13 @@ mod tests {
     //     assert_eq!(res3, "invalid request");
     // }
 
+    #[test]
+    fn dynamic_route_test() {
+        let mut client = Client::new(swish2());
+        let res1 = client.get("/user/23");
+        assert_eq!(res1, "user id is 23");
+    }
+
     // #[test]
     // fn server_setup_test() {
     //     swish2().bish()
@@ -55,10 +69,15 @@ mod tests {
         "hi good morning".to_string()
     }
 
+    fn user_id_handler(url: &str) -> String {
+        "id is".to_string()
+    }
+
     fn swish2() -> Swish {
         let mut swish = Swish::new();
         swish.swish("/path", "GET", path_handler);
         swish.swish("/greet", "GET", greet_handler);
+        swish.swish("/user/:id", "GET", user_id_handler);
         swish
     }
 }
