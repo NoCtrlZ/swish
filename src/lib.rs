@@ -31,21 +31,21 @@ mod tests {
         assert_eq!(res, "/no_route is not found");
     }
 
-    #[test]
-    fn invalid_path_test() {
-        let mut client = Client::new(swish2());
-        let res1 = client.get("shouldn't be return *");
-        let res2 = client.get("//gsaj");
-        let res3 = client.get("");
-        assert_eq!(res1, "invalid request");
-        assert_eq!(res2, "invalid request");
-        assert_eq!(res3, "invalid request");
-    }
+    // #[test]
+    // fn invalid_path_test() {
+    //     let mut client = Client::new(swish2());
+    //     let res1 = client.get("shouldn't be return *");
+    //     let res2 = client.get("//gsaj");
+    //     let res3 = client.get("");
+    //     assert_eq!(res1, "invalid request");
+    //     assert_eq!(res2, "invalid request");
+    //     assert_eq!(res3, "invalid request");
+    // }
 
-    #[test]
-    fn server_setup_test() {
-        swish2().bish()
-    }
+    // #[test]
+    // fn server_setup_test() {
+    //     swish2().bish()
+    // }
 
     fn path_handler(url: &str) -> String {
         "path request".to_string()
