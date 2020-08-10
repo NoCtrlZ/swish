@@ -29,15 +29,15 @@ mod tests {
         let mut client = Client::new(swish2());
         let res1 = client.get("/path");
         let res2 = client.get("/greet");
-        assert_eq!(res1, "path request");
-        assert_eq!(res2, "hi good morning");
+        assert_eq!(res1, "status: 200 body: path request");
+        assert_eq!(res2, "status: 200 body: hi good morning");
     }
 
     #[test]
     fn not_fount_test() {
         let mut client = Client::new(swish2());
         let res = client.get("/no_route");
-        assert_eq!(res, "/no_route is not found");
+        assert_eq!(res, "status: 404 body: /no_route was not found");
     }
 
     #[test]
@@ -46,16 +46,16 @@ mod tests {
         let res1 = client.get("shouldn't be return *");
         let res2 = client.get("//gsaj");
         let res3 = client.get("");
-        assert_eq!(res1, "request is not valid");
-        assert_eq!(res2, "request is not valid");
-        assert_eq!(res3, "request is not valid");
+        assert_eq!(res1, "status: 400 body: request is not valid");
+        assert_eq!(res2, "status: 400 body: request is not valid");
+        assert_eq!(res3, "status: 400 body: request is not valid");
     }
 
     #[test]
     fn dynamic_route_test() {
         let mut client = Client::new(swish2());
         let res1 = client.get("/user/23");
-        assert_eq!(res1, "user dynamic handler");
+        assert_eq!(res1, "status: 200 body: user id is 23");
     }
 
     // #[test]
@@ -80,7 +80,7 @@ mod tests {
     fn user_id_handler(req: Request) -> Response {
         Response {
             status: "200".to_string(),
-            body: format!("{}{}", "user dynamic handler".to_string(), req.param),
+            body: format!("{}{}", "user id is ".to_string(), req.param),
         }
     }
 
