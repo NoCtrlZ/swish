@@ -1,7 +1,7 @@
 use std::net::TcpStream;
 
 use crate::error::ReqErr;
-use crate::entities::{convert_buffer_to_string, is_request_url};
+use crate::entities::convert_buffer_to_string;
 
 #[derive(Debug)]
 pub struct Request {
@@ -9,13 +9,19 @@ pub struct Request {
     pub path: String,
 }
 
-pub fn parse(stream: &mut TcpStream) -> Result<Request, ReqErr> {
+impl Request {
+    pub fn is_valid(&self) -> bool {
+        self.method != "" && self.path != ""
+    }
+}
+
+pub fn parse(stream: &mut TcpStream) -> Request {
     let raw_data = convert_buffer_to_string(stream);
     // println!("{:?}", raw_data);
     convert_string_to_request(&raw_data)
 }
 
-fn convert_string_to_request(text: &str) -> Result<Request, ReqErr> {
+fn convert_string_to_request(text: &str) -> Request {
     let mut components = text.split_whitespace();
     let method = match components.nth(0) {
         Some(e) => e,
@@ -25,12 +31,8 @@ fn convert_string_to_request(text: &str) -> Result<Request, ReqErr> {
         Some(e) => e,
         None => "",
     };
-    if method == "" || !is_request_url(path) {
-        return Err(ReqErr::new("invalid request"));
-    } else {
-        return Ok(Request {
-            method: method.to_string(),
-            path: path.to_string(),
-        });
+    Request {
+        method: method.to_string(),
+        path: path.to_string(),
     }
 }
