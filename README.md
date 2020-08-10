@@ -18,9 +18,12 @@ Sometime other Rust web flameworks can't be built because it has `dependencies w
 - [x] Handler And Route Matcher
 - [x] Static Route Matcher
 - [x] Dynamic Route Matcher
-- [ ] Design Request And Response Struct
-- [ ] Design Error Responser
+- [x] Design Request And Response Struct
+- [x] Design Error Responser
 - [x] Dynamic Route Param Getter
+- [ ] Actual Http Compiler
+- [ ] Actual Http Responser
+- [ ] Define Method And Status Code
 - [ ] Http Request Validater
 - [ ] Http Response Returner
 - [ ] Cros Options
