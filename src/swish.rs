@@ -3,6 +3,7 @@ use crate::router::{Router, Handler};
 use crate::request::{Request, parse};
 use crate::error::{not_found, is_invalid};
 use crate::response::{response, write};
+use crate::entities::is_request_url;
 
 use std::net::{TcpStream, TcpListener};
 use std::io::prelude::*;
@@ -39,7 +40,7 @@ impl Swish {
     }
 
     pub fn search(&mut self, req: &Request) -> Handler {
-        if req.is_valid() {
+        if req.is_valid() && is_request_url(&req.path) {
             for route in &self.router.routes {
                 if match_with(&req, route) {
                     return route.handler
