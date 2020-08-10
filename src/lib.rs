@@ -53,7 +53,7 @@ mod tests {
     fn dynamic_route_test() {
         let mut client = Client::new(swish2());
         let res1 = client.get("/user/23");
-        assert_eq!(res1, "user id is 23");
+        assert_eq!(res1, "user dynamic handler");
     }
 
     // #[test]
@@ -70,7 +70,7 @@ mod tests {
     }
 
     fn user_id_handler(url: &str) -> String {
-        "id is".to_string()
+        "user dynamic handler".to_string()
     }
 
     fn swish2() -> Swish {

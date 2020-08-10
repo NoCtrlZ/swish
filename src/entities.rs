@@ -26,6 +26,12 @@ pub fn convert_buffer_to_string(stream: &mut TcpStream) -> String {
     buffer_to_string(&buffer[..])
 }
 
+pub fn split_slash(text: &str) -> Vec<String> {
+    let mut pathes: Vec<String> = text.split("/").map(|s| s.to_string()).collect();
+    pathes.drain(0..1);
+    pathes
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -63,5 +69,15 @@ mod tests {
         assert_eq!(res5, false);
         assert_eq!(res6, false);
         assert_eq!(res7, false);
+    }
+
+    #[test]
+    fn split_slash_test() {
+        let res1 = split_slash("/path");
+        let res2 = split_slash("/user/23");
+        let res3 = split_slash("/user/:id");
+        assert_eq!(res1, ["path"]);
+        assert_eq!(res2, ["user", "23"]);
+        assert_eq!(res3, ["user", ":id"]);
     }
 }
