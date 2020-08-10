@@ -17,6 +17,10 @@ impl Request {
     pub fn set_param(&mut self, param: &str) {
         self.param = param.to_string();
     }
+
+    pub fn get_param(self) -> String {
+        self.param
+    }
 }
 
 pub fn parse(stream: &mut TcpStream) -> Request {
