@@ -14,3 +14,7 @@ impl ReqErr {
 pub fn not_found(url: &str) -> String {
     format!("{}{}", url, " is not found")
 }
+
+pub fn is_invalid(url: &str) -> String {
+    "request is not valid".to_string()
+}

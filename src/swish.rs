@@ -1,12 +1,11 @@
 use crate::matcher::match_with;
 use crate::router::{Router, Handler};
 use crate::request::{Request, parse};
-use crate::error::not_found;
+use crate::error::{not_found, is_invalid};
 use crate::response::{response, write};
 
 use std::net::{TcpStream, TcpListener};
 use std::io::prelude::*;
-
 
 pub struct Swish {
     pub router: Router,
@@ -33,27 +32,25 @@ impl Swish {
     }
 
     fn handle(&mut self, stream: &mut TcpStream) {
-        match parse(stream) {
-            Ok(result) => {
-                let handler = self.search(&result);
-                let contents = response(handler, result);
-                write(&contents, stream)
-            },
-            Err(error) => {
-                write(&error.msg, stream)
-            },
-        };
+        let req = parse(stream);
+        let handler = self.search(&req);
+        let contents = response(handler, req);
+        write(&contents, stream)
     }
 
     pub fn search(&mut self, req: &Request) -> Handler {
-        for route in &self.router.routes {
-            if match_with(&req, route) {
-                return route.handler
-            } else {
-                continue;
-            };
+        if req.is_valid() {
+            for route in &self.router.routes {
+                if match_with(&req, route) {
+                    return route.handler
+                } else {
+                    continue;
+                };
+            }
+            not_found
+        } else {
+            is_invalid
         }
-        not_found
     }
 }
 
