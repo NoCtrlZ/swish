@@ -20,6 +20,7 @@ impl Client {
             param: "".to_string(),
         };
         let handler = self.server.search(&mut req);
-        response(handler, req)
+        let res = response(handler, req);
+        res.compile()
     }
 }

@@ -35,8 +35,8 @@ impl Swish {
     fn handle(&mut self, stream: &mut TcpStream) {
         let mut req = parse(stream);
         let handler = self.search(&mut req);
-        let contents = response(handler, req);
-        write(&contents, stream)
+        let res = response(handler, req);
+        write(&res.compile(), stream)
     }
 
     pub fn search(&mut self, mut req: &mut Request) -> Handler {

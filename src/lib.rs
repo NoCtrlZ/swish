@@ -9,6 +9,8 @@ mod response;
 
 use crate::swish::Swish;
 use crate::client::Client;
+use crate::response::Response;
+use crate::request::Request;
 
 extern crate regex;
 
@@ -61,16 +63,25 @@ mod tests {
     //     swish2().bish()
     // }
 
-    fn path_handler(url: &str) -> String {
-        "path request".to_string()
+    fn path_handler(req: Request) -> Response {
+        Response {
+            status: "200".to_string(),
+            body: "path request".to_string(),
+        }
     }
 
-    fn greet_handler(url: &str) -> String {
-        "hi good morning".to_string()
+    fn greet_handler(req: Request) -> Response {
+        Response {
+            status: "200".to_string(),
+            body: "hi good morning".to_string(),
+        }
     }
 
-    fn user_id_handler(url: &str) -> String {
-        "user dynamic handler".to_string()
+    fn user_id_handler(req: Request) -> Response {
+        Response {
+            status: "200".to_string(),
+            body: format!("{}{}", "user dynamic handler".to_string(), req.param),
+        }
     }
 
     fn swish2() -> Swish {
