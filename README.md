@@ -14,10 +14,11 @@ Sometime other Rust web flameworks can't be built because it has `dependencies w
 ## Loadmap
 - [x] Basic Test Server
 - [x] Client For Test
+- [x] Route Register
+- [x] Handler And Route Matcher
 - [x] Static Route Matcher
-- [ ] Dynamic Route Matcher
-- [ ] Route Register
-- [ ] Handler And Route Matcher
+- [x] Dynamic Route Matcher
+- [ ] Dynamic Route Param Getter
 - [ ] Http Request Validater
 - [ ] Http Response Returner
 - [ ] Cros Options
