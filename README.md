@@ -1,6 +1,6 @@
 # Swish
 ![Rust Cargo Test](https://github.com/NoCtrlZ/swish/workflows/Rust%20Cargo%20Test/badge.svg?branch=master)  
-This is the beef web flamework for R**ket🥩 Swish Swish Bish🎶 Another One In The Basket🏀
+This Is The Beef Web Flamework For R**ket🥩 Swish Swish Bish🎶 Another One In The Basket🏀
 ## Abstract
 ### Three rules🔔
 There are three rules I have when making this web flamework.

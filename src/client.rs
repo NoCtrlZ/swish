@@ -14,11 +14,12 @@ impl Client {
     }
 
     pub fn get(&mut self, path: &str) -> String {
-        let req = Request {
+        let mut req = Request {
             method: "GET".to_string(),
             path: path.to_string(),
+            param: "".to_string(),
         };
-        let handler = self.server.search(&req);
+        let handler = self.server.search(&mut req);
         response(handler, req)
     }
 }

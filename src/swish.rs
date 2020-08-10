@@ -33,16 +33,16 @@ impl Swish {
     }
 
     fn handle(&mut self, stream: &mut TcpStream) {
-        let req = parse(stream);
-        let handler = self.search(&req);
+        let mut req = parse(stream);
+        let handler = self.search(&mut req);
         let contents = response(handler, req);
         write(&contents, stream)
     }
 
-    pub fn search(&mut self, req: &Request) -> Handler {
+    pub fn search(&mut self, mut req: &mut Request) -> Handler {
         if req.is_valid() && is_request_url(&req.path) {
             for route in &self.router.routes {
-                if match_with(&req, route) {
+                if match_with(&mut req, route) {
                     return route.handler
                 } else {
                     continue;
