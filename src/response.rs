@@ -1,7 +1,7 @@
 use crate::router::Handler;
 use crate::request::Request;
 
-use std::net::{TcpStream, TcpListener};
+use std::net::TcpStream;
 use std::io::prelude::*;
 
 pub fn response(handler: Handler, req: Request) -> String {

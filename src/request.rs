@@ -1,6 +1,5 @@
 use std::net::TcpStream;
 
-use crate::error::ReqErr;
 use crate::entities::convert_buffer_to_string;
 
 #[derive(Debug)]
