@@ -1,4 +1,5 @@
 use crate::router::Route;
+use crate::response::Response;
 use crate::request::Request;
 use crate::entities::split_slash;
 
@@ -89,7 +90,10 @@ mod tests {
         assert_eq!(res1, false);
     }
 
-    fn user_route_handler(url: &str) -> String {
-        "user path success".to_string()
+    fn user_route_handler(req: Request) -> Response {
+        Response {
+            status: "200".to_string(),
+            body: "user path success".to_string(),
+        }
     }
 }
