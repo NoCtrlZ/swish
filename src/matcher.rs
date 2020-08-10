@@ -2,7 +2,7 @@ use crate::router::Route;
 use crate::request::Request;
 use crate::entities::split_slash;
 
-pub fn match_with(req: &Request, route: &Route) -> bool {
+pub fn match_with(req: &mut Request, route: &Route) -> bool {
     if (route.method == req.method) {
         let pathes = split_slash(&req.path);
         let routes = split_slash(&route.path);
@@ -19,6 +19,7 @@ pub fn match_with(req: &Request, route: &Route) -> bool {
             } else {
                 for n in 0..pathes.len() {
                     if routes[n].chars().next().expect("fail to get next char") == ':' {
+                        req.set_param(&pathes[n]);
                         continue;
                     } else if pathes[n] == routes[n] {
                         continue;
@@ -52,17 +53,20 @@ mod tests {
     use super::*;
     #[test]
     fn match_with_test() {
-        let req = Request {
+        let mut req = Request {
             method: "GET".to_string(),
             path: "/user/23".to_string(),
+            param: "".to_string(),
         };
         let route = Route {
             method: "GET".to_string(),
             path: "/user/:id".to_string(),
             handler: user_route_handler,
         };
-        let res1 = match_with(&req, &route);
+        let res1 = match_with(&mut req, &route);
+        let param = req.param;
         assert_eq!(res1, true);
+        assert_eq!(param, "23");
     }
 
     #[test]
