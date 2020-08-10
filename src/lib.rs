@@ -58,10 +58,10 @@ mod tests {
         assert_eq!(res1, "status: 200 body: user id is 23");
     }
 
-    // #[test]
-    // fn server_setup_test() {
-    //     swish2().bish()
-    // }
+    #[test]
+    fn server_setup_test() {
+        swish2().bish()
+    }
 
     fn path_handler(req: Request) -> Response {
         Response {

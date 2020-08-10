@@ -23,6 +23,7 @@ Sometime other Rust web flameworks can't be built because it has `dependencies w
 - [x] Dynamic Route Param Getter
 - [ ] Actual Http Compiler
 - [ ] Actual Http Responser
+- [ ] Handler Return Only Body With Chosing Content Type
 - [ ] Define Method And Status Code
 - [ ] Http Request Validater
 - [ ] Http Response Returner

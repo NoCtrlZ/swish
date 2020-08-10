@@ -1,6 +1,27 @@
 [tasks.ut]
-description = "Run Swish Server"
+description = "Run Test"
 script = ['''
 #!/usr/bin/env bash
 cargo test -- --nocapture
+''']
+
+[tasks.get1]
+description = "Get /path"
+script = ['''
+#!/usr/bin/env bash
+curl localhost:3000/path
+''']
+
+[tasks.get2]
+description = "Get /user/23"
+script = ['''
+#!/usr/bin/env bash
+curl localhost:3000/user/23
+''']
+
+[tasks.get3]
+description = "Get invalid path"
+script = ['''
+#!/usr/bin/env bash
+curl localhost:3000/*0---
 ''']
