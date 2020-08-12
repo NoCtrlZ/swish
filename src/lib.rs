@@ -3,6 +3,7 @@ mod entities;
 mod error;
 mod global;
 mod http;
+mod json;
 mod matcher;
 mod request;
 mod response;
@@ -21,7 +22,7 @@ mod tests {
     use super::*;
     #[test]
     #[should_panic]
-    fn register_routing_test() {
+    fn register_invalid_routing_test() {
         let mut swish = Swish::new();
         swish.swish("/=?", "GET", path_handler);
     }
@@ -31,33 +32,18 @@ mod tests {
         let mut client = Client::new(swish2());
         let res1 = client.get("/path");
         let res2 = client.get("/greet");
+        let res3 = client.get("/no_route");
+        let res4 = client.get("shouldn't be return *");
+        let res5 = client.get("//gsaj");
+        let res6 = client.get("");
+        let res7 = client.get("/user/23");
         assert_eq!(res1, "HTTP/1.1 200 OK\r\n\r\npath request");
         assert_eq!(res2, "HTTP/1.1 200 OK\r\n\r\nhi good morning");
-    }
-
-    #[test]
-    fn not_fount_test() {
-        let mut client = Client::new(swish2());
-        let res = client.get("/no_route");
-        assert_eq!(res, "HTTP/1.1 404 Not Found\r\n\r\n");
-    }
-
-    #[test]
-    fn invalid_path_test() {
-        let mut client = Client::new(swish2());
-        let res1 = client.get("shouldn't be return *");
-        let res2 = client.get("//gsaj");
-        let res3 = client.get("");
-        assert_eq!(res1, "HTTP/1.1 400 Bad Request\r\n\r\n");
-        assert_eq!(res2, "HTTP/1.1 400 Bad Request\r\n\r\n");
-        assert_eq!(res3, "HTTP/1.1 400 Bad Request\r\n\r\n");
-    }
-
-    #[test]
-    fn dynamic_route_test() {
-        let mut client = Client::new(swish2());
-        let res1 = client.get("/user/23");
-        assert_eq!(res1, "HTTP/1.1 200 OK\r\n\r\nuser id is 23");
+        assert_eq!(res3, "HTTP/1.1 404 Not Found\r\n\r\n");
+        assert_eq!(res4, "HTTP/1.1 400 Bad Request\r\n\r\n");
+        assert_eq!(res5, "HTTP/1.1 400 Bad Request\r\n\r\n");
+        assert_eq!(res6, "HTTP/1.1 400 Bad Request\r\n\r\n");
+        assert_eq!(res7, "HTTP/1.1 200 OK\r\n\r\nuser id is 23");
     }
 
     #[test]

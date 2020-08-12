@@ -1,5 +1,6 @@
 use crate::entities::is_request_url;
 use crate::error::{is_invalid, not_found};
+use crate::global::Config;
 use crate::matcher::match_with;
 use crate::request::{parse, Request};
 use crate::response::{response, write};
@@ -10,12 +11,14 @@ use std::net::{TcpListener, TcpStream};
 
 pub struct Swish {
     pub router: Router,
+    pub config: Config,
 }
 
 impl Swish {
     pub fn new() -> Swish {
         Swish {
             router: Router { routes: Vec::new() },
+            config: Config::new(),
         }
     }
 
