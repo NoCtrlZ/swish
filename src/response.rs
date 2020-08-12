@@ -1,5 +1,6 @@
 use crate::router::Handler;
 use crate::request::Request;
+use crate::global::HTTP_VERSION;
 
 use std::net::TcpStream;
 use std::io::prelude::*;
@@ -12,7 +13,10 @@ pub struct Response {
 
 impl Response {
     pub fn compile(self) -> String {
-        format!("status: {} body: {}", self.status, self.body)
+        let mut response_data = HTTP_VERSION.to_string();
+        let status_and_body = format!("status: {} body: {}", self.status, self.body);
+        response_data.push_str(&status_and_body);
+        response_data
     }
 }
 

@@ -6,9 +6,11 @@ mod client;
 mod error;
 mod entities;
 mod response;
+mod global;
+mod http;
 
 use crate::swish::Swish;
-use crate::client::Client;
+use crate::client::{Client, request};
 use crate::response::Response;
 use crate::request::Request;
 
@@ -58,10 +60,10 @@ mod tests {
         assert_eq!(res1, "status: 200 body: user id is 23");
     }
 
-    #[test]
-    fn server_setup_test() {
-        swish2().bish()
-    }
+    // #[test]
+    // fn server_setup_test() {
+    //     swish2().bish()
+    // }
 
     fn path_handler(req: Request) -> Response {
         Response {
