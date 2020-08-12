@@ -57,6 +57,8 @@ mod tests {
         let mut req = Request {
             method: "GET".to_string(),
             path: "/user/23".to_string(),
+            header: "".to_string(),
+            body: "".to_string(),
             param: "".to_string(),
         };
         let route = Route {

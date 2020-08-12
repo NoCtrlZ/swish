@@ -26,6 +26,8 @@ impl Client {
         let mut req = Request {
             method: "GET".to_string(),
             path: path.to_string(),
+            header: "".to_string(),
+            body: "".to_string(),
             param: "".to_string(),
         };
         let handler = self.server.search(&mut req);

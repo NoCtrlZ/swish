@@ -6,6 +6,8 @@ use crate::entities::convert_buffer_to_string;
 pub struct Request {
     pub method: String,
     pub path: String,
+    pub header: String,
+    pub body: String,
     pub param: String,
 }
 
@@ -24,13 +26,38 @@ impl Request {
 }
 
 pub fn parse(stream: &mut TcpStream) -> Request {
-    let raw_data = convert_buffer_to_string(stream);
-    println!("{:?}", raw_data);
-    convert_string_to_request(&raw_data)
+    let req = convert_buffer_to_string(stream);
+    println!("{:?}", req);
+    let (header, body) = devide_header_and_body(&req);
+    let contents = devide_into_contents(&header);
+    let (method, path) = get_method_and_path(&contents[0]);
+    Request {
+        method: method,
+        path: path,
+        header: contents[1].clone(),
+        body: body,
+        param: "".to_string(),
+    }
 }
 
-fn convert_string_to_request(text: &str) -> Request {
-    let mut components = text.split_whitespace();
+fn devide_header_and_body(req: &str) -> (String, String) {
+    let components: Vec<String> = req.split("\r\n\r\n").map(|s| s.to_string()).collect();
+    if components.len() < 2 {
+        panic!("invalid request: body doesn't exist")
+    }
+    (components[0].clone(), components[1].clone())
+}
+
+fn devide_into_contents(req: &str) -> Vec<String> {
+    let components: Vec<String> = req.split("\r\n\r\n").map(|s| s.to_string()).collect();
+    if components.len() < 2 {
+        panic!("invalid request: header or prefix doesn't exist")
+    }
+    components
+}
+
+fn get_method_and_path(req: &str) -> (String, String) {
+    let mut components = req.split_whitespace();
     let method = match components.nth(0) {
         Some(e) => e,
         None => "",
@@ -39,9 +66,5 @@ fn convert_string_to_request(text: &str) -> Request {
         Some(e) => e,
         None => "",
     };
-    Request {
-        method: method.to_string(),
-        path: path.to_string(),
-        param: "".to_string(),
-    }
+    (method.to_string(), path.to_string())
 }
