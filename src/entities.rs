@@ -9,12 +9,12 @@ pub fn buffer_to_string(buffer: &[u8]) -> String {
 }
 
 pub fn is_route_url(url: &str) -> bool {
-    let url_regex = Regex::new(r"^/[\w]+(/[\w -.!:()])*").unwrap();
+    let url_regex = Regex::new(r"^/[\w]+(/[\w -.!:()])*").expect("fail to new regex");
     url_regex.is_match(&url)
 }
 
 pub fn is_request_url(url: &str) -> bool {
-    let url_regex = Regex::new(r"^/[\w]+(/[\w -.!?=()])*").unwrap();
+    let url_regex = Regex::new(r"^/[\w]+(/[\w -.!?=()])*").expect("fail to new regex");
     url_regex.is_match(&url)
 }
 
