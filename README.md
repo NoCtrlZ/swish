@@ -11,6 +11,8 @@ There are three rules I have when making this web flamework.
 Sometime other Rust web flameworks can't be built because it has `dependencies with nightly modules`. Do we need to be an OSS committer? It's so ridiculous! And we also don't prefer to use left-pad packages. I'd like to say `We are programmer not OSS committer nor fucking copy paster!`
 ## Dependencies Except Std
 - regex
+- serde
+- serde_json
 ## Loadmap
 - [x] Basic Test Server
 - [x] Client For Test
@@ -22,10 +24,9 @@ Sometime other Rust web flameworks can't be built because it has `dependencies w
 - [x] Design Error Responser
 - [x] Dynamic Route Param Getter
 - [x] Actual Http Compiler
-- [ ] Actual Http Header Validater
 - [ ] Actual Http Responser
 - [ ] Handler Return Only Body With Chosing Content Type
 - [ ] Define Method And Status Code
+- [ ] Cros Options
 - [ ] Http Request Validater
 - [ ] Http Response Returner
-- [ ] Cros Options
