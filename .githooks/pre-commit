@@ -1,8 +1,7 @@
 #!/bin/bash
 
 for file in $(git diff --name-only --staged); do
-    dir=`dirname $file`
-    if [$dir == "src" && echo basename $file | sed 's/^.*\.\([^\.]*\)$/\1/' == "rs"]; then
+    if [`dirname $file` == "src" && echo basename $file | sed 's/^.*\.\([^\.]*\)$/\1/' == "rs"]; then
         rustfmt $file
         git add $file
     fi
