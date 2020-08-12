@@ -31,15 +31,15 @@ mod tests {
         let mut client = Client::new(swish2());
         let res1 = client.get("/path");
         let res2 = client.get("/greet");
-        assert_eq!(res1, "status: 200 body: path request");
-        assert_eq!(res2, "status: 200 body: hi good morning");
+        assert_eq!(res1, "HTTP/1.1 200 OK\r\n\r\npath request");
+        assert_eq!(res2, "HTTP/1.1 200 OK\r\n\r\nhi good morning");
     }
 
     #[test]
     fn not_fount_test() {
         let mut client = Client::new(swish2());
         let res = client.get("/no_route");
-        assert_eq!(res, "status: 404 body: /no_route was not found");
+        assert_eq!(res, "HTTP/1.1 404 Not Found\r\n\r\n");
     }
 
     #[test]
@@ -48,16 +48,16 @@ mod tests {
         let res1 = client.get("shouldn't be return *");
         let res2 = client.get("//gsaj");
         let res3 = client.get("");
-        assert_eq!(res1, "status: 400 body: request is not valid");
-        assert_eq!(res2, "status: 400 body: request is not valid");
-        assert_eq!(res3, "status: 400 body: request is not valid");
+        assert_eq!(res1, "HTTP/1.1 400 Bad Request\r\n\r\n");
+        assert_eq!(res2, "HTTP/1.1 400 Bad Request\r\n\r\n");
+        assert_eq!(res3, "HTTP/1.1 400 Bad Request\r\n\r\n");
     }
 
     #[test]
     fn dynamic_route_test() {
         let mut client = Client::new(swish2());
         let res1 = client.get("/user/23");
-        assert_eq!(res1, "status: 200 body: user id is 23");
+        assert_eq!(res1, "HTTP/1.1 200 OK\r\n\r\nuser id is 23");
     }
 
     // #[test]
@@ -67,21 +67,21 @@ mod tests {
 
     fn path_handler(req: Request) -> Response {
         Response {
-            status: "200".to_string(),
+            status: 200,
             body: "path request".to_string(),
         }
     }
 
     fn greet_handler(req: Request) -> Response {
         Response {
-            status: "200".to_string(),
+            status: 200,
             body: "hi good morning".to_string(),
         }
     }
 
     fn user_id_handler(req: Request) -> Response {
         Response {
-            status: "200".to_string(),
+            status: 200,
             body: format!("{}{}", "user id is ".to_string(), req.param),
         }
     }
