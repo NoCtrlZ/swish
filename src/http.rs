@@ -15,13 +15,17 @@ impl StatusCode {
 
 pub fn get_status_code(code: u16) -> StatusCode {
     match get_status_msg(code) {
-        Ok(msg) => return StatusCode {
-            code: code,
-            msg: msg,
-        },
-        Err(msg) => return StatusCode {
-            code: 500,
-            msg: msg,
+        Ok(msg) => {
+            return StatusCode {
+                code: code,
+                msg: msg,
+            }
+        }
+        Err(msg) => {
+            return StatusCode {
+                code: 500,
+                msg: msg,
+            }
         }
     }
 }

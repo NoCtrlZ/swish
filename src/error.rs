@@ -1,5 +1,5 @@
-use crate::response::Response;
 use crate::request::Request;
+use crate::response::Response;
 
 pub fn not_found(req: Request) -> Response {
     Response {

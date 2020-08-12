@@ -1,6 +1,6 @@
 use crate::entities::is_route_url;
-use crate::response::Response;
 use crate::request::Request;
+use crate::response::Response;
 
 pub type Handler = fn(Request) -> Response;
 
