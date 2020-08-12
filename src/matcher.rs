@@ -1,7 +1,7 @@
-use crate::router::Route;
-use crate::response::Response;
-use crate::request::Request;
 use crate::entities::split_slash;
+use crate::request::Request;
+use crate::response::Response;
+use crate::router::Route;
 
 pub fn match_with(req: &mut Request, route: &Route) -> bool {
     if (route.method == req.method) {
@@ -13,7 +13,7 @@ pub fn match_with(req: &mut Request, route: &Route) -> bool {
                     if pathes[n] == routes[n] {
                         continue;
                     } else {
-                        return false
+                        return false;
                     }
                 }
                 true
@@ -25,7 +25,7 @@ pub fn match_with(req: &mut Request, route: &Route) -> bool {
                     } else if pathes[n] == routes[n] {
                         continue;
                     } else {
-                        return false
+                        return false;
                     }
                 }
                 true
@@ -38,10 +38,10 @@ pub fn match_with(req: &mut Request, route: &Route) -> bool {
     }
 }
 
-pub fn is_static_route(routes :Vec<String>) -> bool {
+pub fn is_static_route(routes: Vec<String>) -> bool {
     for path in &routes {
         if path.chars().next().expect("fail to get next char") == ':' {
-            return false
+            return false;
         } else {
             continue;
         }

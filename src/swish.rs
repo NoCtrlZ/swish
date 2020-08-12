@@ -1,12 +1,12 @@
-use crate::matcher::match_with;
-use crate::router::{Router, Handler};
-use crate::request::{Request, parse};
-use crate::error::{not_found, is_invalid};
-use crate::response::{response, write};
 use crate::entities::is_request_url;
+use crate::error::{is_invalid, not_found};
+use crate::matcher::match_with;
+use crate::request::{parse, Request};
+use crate::response::{response, write};
+use crate::router::{Handler, Router};
 
-use std::net::{TcpStream, TcpListener};
 use std::io::prelude::*;
+use std::net::{TcpListener, TcpStream};
 
 pub struct Swish {
     pub router: Router,
@@ -15,9 +15,7 @@ pub struct Swish {
 impl Swish {
     pub fn new() -> Swish {
         Swish {
-            router: Router {
-                routes: Vec::new(),
-            }
+            router: Router { routes: Vec::new() },
         }
     }
 
@@ -43,7 +41,7 @@ impl Swish {
         if req.is_valid() && is_request_url(&req.path) {
             for route in &self.router.routes {
                 if match_with(&mut req, route) {
-                    return route.handler
+                    return route.handler;
                 } else {
                     continue;
                 };

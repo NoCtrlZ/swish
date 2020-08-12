@@ -1,18 +1,18 @@
-mod matcher;
-mod router;
-mod swish;
-mod request;
 mod client;
-mod error;
 mod entities;
-mod response;
+mod error;
 mod global;
 mod http;
+mod matcher;
+mod request;
+mod response;
+mod router;
+mod swish;
 
-use crate::swish::Swish;
-use crate::client::{Client, request};
-use crate::response::Response;
+use crate::client::{request, Client};
 use crate::request::Request;
+use crate::response::Response;
+use crate::swish::Swish;
 
 extern crate regex;
 

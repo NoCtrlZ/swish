@@ -1,6 +1,6 @@
-use crate::swish::Swish;
-use crate::response::response;
 use crate::request::Request;
+use crate::response::response;
+use crate::swish::Swish;
 
 use std::io::prelude::*;
 use std::io::BufReader;
@@ -14,14 +14,12 @@ mod method {
 }
 
 pub struct Client {
-    pub server: Swish
+    pub server: Swish,
 }
 
 impl Client {
     pub fn new(swish: Swish) -> Client {
-        Client {
-            server: swish,
-        }
+        Client { server: swish }
     }
 
     pub fn get(&mut self, path: &str) -> String {
@@ -42,8 +40,12 @@ pub fn request(endpoint: &str) -> String {
     contents.push_str(&format!("{}{}", "/", " "));
     contents.push_str(PREFIX);
     contents.push_str(&format!("{}{}", "\r\n\r\n", "body"));
-    stream.write(&contents.as_bytes()).expect("fail to write data to stream");
+    stream
+        .write(&contents.as_bytes())
+        .expect("fail to write data to stream");
     let mut buffer = [0; 8192];
     stream.read_exact(&mut buffer);
-    String::from_utf8_lossy(&buffer[..]).trim_matches(char::from(0)).to_string()
+    String::from_utf8_lossy(&buffer[..])
+        .trim_matches(char::from(0))
+        .to_string()
 }
