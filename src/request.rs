@@ -25,7 +25,7 @@ impl Request {
 
 pub fn parse(stream: &mut TcpStream) -> Request {
     let raw_data = convert_buffer_to_string(stream);
-    // println!("{:?}", raw_data);
+    println!("{:?}", raw_data);
     convert_string_to_request(&raw_data)
 }
 
