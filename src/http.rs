@@ -4,6 +4,15 @@ pub struct StatusCode {
     pub msg: String,
 }
 
+impl StatusCode {
+    pub fn compile(self) -> String {
+        let mut prefix = self.code.to_string();
+        prefix.push_str(" ");
+        prefix.push_str(&self.msg);
+        prefix
+    }
+}
+
 pub fn get_status_code(code: u16) -> StatusCode {
     match get_status_msg(code) {
         Ok(msg) => return StatusCode {

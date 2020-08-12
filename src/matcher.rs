@@ -92,7 +92,7 @@ mod tests {
 
     fn user_route_handler(req: Request) -> Response {
         Response {
-            status: "200".to_string(),
+            status: 200,
             body: "user path success".to_string(),
         }
     }
