@@ -1,3 +1,10 @@
+[tasks.setup]
+description = "Project Setup"
+script = ['''
+#!/usr/bin/env bash
+git config core.hooksPath .githooks
+''']
+
 [tasks.ut]
 description = "Run Test"
 script = ['''
