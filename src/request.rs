@@ -45,11 +45,12 @@ fn devide_header_and_body(req: &str) -> (String, String) {
     if components.len() < 2 {
         panic!("invalid request: body doesn't exist")
     }
+    // println!("{:?}", components);
     (components[0].clone(), components[1].clone())
 }
 
 fn devide_into_contents(req: &str) -> Vec<String> {
-    let components: Vec<String> = req.split("\r\n\r\n").map(|s| s.to_string()).collect();
+    let components: Vec<String> = req.split("\r\n").map(|s| s.to_string()).collect();
     if components.len() < 2 {
         panic!("invalid request: header or prefix doesn't exist")
     }
