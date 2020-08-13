@@ -102,7 +102,7 @@ mod tests {
         name: String,
     }
 
-    fn user_route_handler(req: Request) -> Box<dyn Body> {
+    fn user_route_handler(req: &Request) -> Box<dyn Body> {
         Box::new(Json(Sample {
             id: 1,
             name: "shin".to_string(),

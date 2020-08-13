@@ -5,5 +5,8 @@
 ## Todo
 - Capacitate user to set contents length limitation.
 - Support almost status code.
+- Write unit test and integration test separately.
 ## Bugs
 - Can't handle root routing.
+## Point
+- If it's necessary to import other module for test, it should be written as integration test.
