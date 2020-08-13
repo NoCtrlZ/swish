@@ -4,7 +4,7 @@ use crate::global::Config;
 use crate::matcher::match_with;
 use crate::request::{parse, Request};
 use crate::response::{write, Response};
-use crate::router::{Handler, Router};
+use crate::router::{handler_exec, Handler, Router};
 
 use std::io::prelude::*;
 use std::net::{TcpListener, TcpStream};
@@ -36,31 +36,29 @@ impl Swish {
     fn handle(&mut self, stream: &mut TcpStream) {
         let mut req = parse(stream);
         println!("{:?}", req);
-        let res = self.search(&mut req);
+        let mut res = self.search(&mut req);
+        let contents = self.compose(&mut res);
         write(&res.compile(), stream)
+    }
+
+    fn compose(&self, res: &mut Response) -> String {
+        let header = format!("Content-Type: {}; {}", res.ctype, self.config.get_charset());
+        res.set_header(&header);
+        res.compile()
     }
 
     pub fn search(&mut self, mut req: &mut Request) -> Response {
         if req.is_valid() && is_request_url(&req.path) {
             for route in &self.router.routes {
                 if match_with(&mut req, route) {
-                    return Response {
-                        status: 200,
-                        body: (route.handler)(&*req).compile(),
-                    };
+                    return handler_exec(route.handler, &*req, 200);
                 } else {
                     continue;
                 };
             }
-            Response {
-                status: 404,
-                body: (not_found)(&*req).compile(),
-            }
+            handler_exec(not_found, &*req, 404)
         } else {
-            Response {
-                status: 400,
-                body: (is_invalid)(&*req).compile(),
-            }
+            handler_exec(not_found, &*req, 400)
         }
     }
 }
