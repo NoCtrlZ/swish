@@ -1,4 +1,9 @@
 # Note
+## Versioning
+`0.0.0`
+- First: Changing without having compatibility.
+- Second: Adding function with having compatibility.
+- Third: Fixing bug with having compatibility.
 ## Test
 - Unit test should be written in each module file.
 - Integration test should be written in `src/lib.rs`.
