@@ -26,10 +26,6 @@ impl Response {
     }
 }
 
-pub fn response(handler: Handler, req: Request) -> Box<dyn Body> {
-    handler(req)
-}
-
 pub fn write(contents: &str, stream: &mut TcpStream) {
     stream
         .write(contents.as_bytes())

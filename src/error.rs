@@ -11,14 +11,14 @@ struct Error {
     msg: String,
 }
 
-pub fn not_found(req: Request) -> Box<dyn Body> {
+pub fn not_found(req: &Request) -> Box<dyn Body> {
     Box::new(Json(Error {
         code: 404,
         msg: "".to_string(),
     }))
 }
 
-pub fn is_invalid(req: Request) -> Box<dyn Body> {
+pub fn is_invalid(req: &Request) -> Box<dyn Body> {
     Box::new(Json(Error {
         code: 400,
         msg: "".to_string(),

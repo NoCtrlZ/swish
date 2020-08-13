@@ -3,7 +3,7 @@ use crate::error::{is_invalid, not_found};
 use crate::global::Config;
 use crate::matcher::match_with;
 use crate::request::{parse, Request};
-use crate::response::{response, write};
+use crate::response::{write, Response};
 use crate::router::{Handler, Router};
 
 use std::io::prelude::*;
@@ -36,23 +36,31 @@ impl Swish {
     fn handle(&mut self, stream: &mut TcpStream) {
         let mut req = parse(stream);
         println!("{:?}", req);
-        let handler = self.search(&mut req);
-        let res = response(handler, req);
+        let res = self.search(&mut req);
         write(&res.compile(), stream)
     }
 
-    pub fn search(&mut self, mut req: &mut Request) -> Handler {
+    pub fn search(&mut self, mut req: &mut Request) -> Response {
         if req.is_valid() && is_request_url(&req.path) {
             for route in &self.router.routes {
                 if match_with(&mut req, route) {
-                    return route.handler;
+                    return Response {
+                        status: 200,
+                        body: (route.handler)(&*req).compile(),
+                    };
                 } else {
                     continue;
                 };
             }
-            not_found
+            Response {
+                status: 404,
+                body: (not_found)(&*req).compile(),
+            }
         } else {
-            is_invalid
+            Response {
+                status: 400,
+                body: (is_invalid)(&*req).compile(),
+            }
         }
     }
 }
