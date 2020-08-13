@@ -2,6 +2,7 @@ use crate::global::HTTP_VERSION;
 use crate::http::get_status_code;
 use crate::request::Request;
 use crate::router::Handler;
+use crate::types::Body;
 
 use std::io::prelude::*;
 use std::net::TcpStream;
@@ -25,7 +26,7 @@ impl Response {
     }
 }
 
-pub fn response(handler: Handler, req: Request) -> Response {
+pub fn response(handler: Handler, req: Request) -> Box<dyn Body> {
     handler(req)
 }
 

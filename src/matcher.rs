@@ -1,7 +1,11 @@
 use crate::entities::split_slash;
+use crate::json::Json;
 use crate::request::Request;
 use crate::response::Response;
 use crate::router::Route;
+use crate::types::Body;
+
+use serde::{Deserialize, Serialize};
 
 pub fn match_with(req: &mut Request, route: &Route) -> bool {
     if (route.method == req.method) {
@@ -92,10 +96,16 @@ mod tests {
         assert_eq!(res1, false);
     }
 
-    fn user_route_handler(req: Request) -> Response {
-        Response {
-            status: 200,
-            body: "user path success".to_string(),
-        }
+    #[derive(Debug, Deserialize, Serialize)]
+    struct Sample {
+        id: u16,
+        name: String,
+    }
+
+    fn user_route_handler(req: Request) -> Box<dyn Body> {
+        Box::new(Json(Sample {
+            id: 1,
+            name: "shin".to_string(),
+        }))
     }
 }
