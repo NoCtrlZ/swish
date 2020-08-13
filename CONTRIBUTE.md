@@ -6,7 +6,13 @@
 - Capacitate user to set contents length limitation.
 - Support almost status code.
 - Write unit test and integration test separately.
+- Box trait dyn should be replaced with enum.
+- Add method field to router to optimize algorithm.
+- Return content length.
+- Header should be hashmap.
+- Add config struct to response to compile header.
 ## Bugs
 - Can't handle root routing.
 ## Point
 - If it's necessary to import other module for test, it should be written as integration test.
+- Public function should be tested in lib.rs and private function should be tested in file it located.

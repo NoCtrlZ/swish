@@ -50,10 +50,10 @@ mod tests {
     //     assert_eq!(res7, "{\"code\":200,\"data\":\"user id is 23\"}");
     // }
 
-    // #[test]
-    // fn server_setup_test() {
-    //     swish2().bish()
-    // }
+    #[test]
+    fn server_setup_test() {
+        swish2().bish()
+    }
 
     #[derive(Debug, Deserialize, Serialize)]
     struct Sample {

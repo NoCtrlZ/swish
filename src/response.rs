@@ -9,20 +9,27 @@ use std::net::TcpStream;
 
 #[derive(Debug)]
 pub struct Response {
-    pub status: u16,
+    pub status_code: u16,
+    pub ctype: String,
+    pub header: String,
     pub body: String,
 }
 
 impl Response {
-    pub fn compile(self) -> String {
+    pub fn compile(&self) -> String {
         let mut response_data = HTTP_VERSION.to_string();
         let status_and_body = format!(
-            " {}\r\n\r\n{}",
-            get_status_code(self.status).compile(),
+            " {}\r\n{}\r\n\r\n{}",
+            get_status_code(self.status_code).compile(),
+            self.header,
             self.body
         );
         response_data.push_str(&status_and_body);
         response_data
+    }
+
+    pub fn set_header(&mut self, header: &str) {
+        self.header = header.to_string()
     }
 }
 
