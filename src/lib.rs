@@ -9,13 +9,17 @@ mod request;
 mod response;
 mod router;
 mod swish;
+mod types;
 
 use crate::client::{request, Client};
+use crate::json::Json;
 use crate::request::Request;
 use crate::response::Response;
 use crate::swish::Swish;
+use crate::types::Body;
 
 extern crate regex;
+use serde::{Deserialize, Serialize};
 
 #[cfg(test)]
 mod tests {
@@ -46,30 +50,36 @@ mod tests {
         assert_eq!(res7, "HTTP/1.1 200 OK\r\n\r\nuser id is 23");
     }
 
-    #[test]
-    fn server_setup_test() {
-        swish2().bish()
+    // #[test]
+    // fn server_setup_test() {
+    //     swish2().bish()
+    // }
+
+    #[derive(Debug, Deserialize, Serialize)]
+    struct Sample {
+        code: u16,
+        data: String,
     }
 
-    fn path_handler(req: Request) -> Response {
-        Response {
-            status: 200,
-            body: "path request".to_string(),
-        }
+    fn path_handler(req: Request) -> Box<dyn Body> {
+        Box::new(Json(Sample {
+            code: 200,
+            data: "path request".to_string(),
+        }))
     }
 
-    fn greet_handler(req: Request) -> Response {
-        Response {
-            status: 200,
-            body: "hi good morning".to_string(),
-        }
+    fn greet_handler(req: Request) -> Box<dyn Body> {
+        Box::new(Json(Sample {
+            code: 200,
+            data: "hi good morning".to_string(),
+        }))
     }
 
-    fn user_id_handler(req: Request) -> Response {
-        Response {
-            status: 200,
-            body: format!("{}{}", "user id is ".to_string(), req.param),
-        }
+    fn user_id_handler(req: Request) -> Box<dyn Body> {
+        Box::new(Json(Sample {
+            code: 200,
+            data: format!("{}{}", "user id is ".to_string(), req.param),
+        }))
     }
 
     fn swish2() -> Swish {

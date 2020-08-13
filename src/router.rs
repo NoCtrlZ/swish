@@ -1,8 +1,9 @@
 use crate::entities::is_route_url;
 use crate::request::Request;
 use crate::response::Response;
+use crate::types::Body;
 
-pub type Handler = fn(Request) -> Response;
+pub type Handler = fn(Request) -> Box<dyn Body>;
 
 pub struct Route {
     pub path: String,
