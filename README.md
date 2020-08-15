@@ -31,6 +31,7 @@ I count the crime I committed. Karma‘s not a liar!
 - [x] Return Basic Header Like Content Lenght
 - [ ] Cros Options
 - [ ] Http Request Validater
+- [ ] Refactoring According To [Here](https://github.com/NoCtrlZ/swish/blob/master/CONTRIBUTE.md)
 - [ ] Version `0.1.0` Release
 - [ ] Define Method And Status Code
 ## Test
