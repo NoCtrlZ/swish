@@ -4,6 +4,13 @@ pub struct StatusCode {
     pub msg: String,
 }
 
+#[derive(Debug, PartialEq, Eq)]
+pub enum Method {
+    GET,
+    POST,
+    OTHER,
+}
+
 impl StatusCode {
     pub fn compile(self) -> String {
         let mut prefix = self.code.to_string();
@@ -36,6 +43,14 @@ fn get_status_msg(code: u16) -> Result<String, String> {
         400 => Ok("Bad Request".to_string()),
         404 => Ok("Not Found".to_string()),
         _ => Err("Internal Server Error".to_string()),
+    }
+}
+
+pub fn get_method(req_method: &str) -> Method {
+    match req_method {
+        "GET" => Method::GET,
+        "POST" => Method::POST,
+        _ => Method::OTHER,
     }
 }
 

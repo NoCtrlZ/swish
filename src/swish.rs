@@ -1,6 +1,7 @@
 use crate::entities::is_request_url;
 use crate::error::{is_invalid, not_found};
 use crate::global::Config;
+use crate::http::Method;
 use crate::matcher::match_with;
 use crate::request::{parse, Request};
 use crate::response::{write, Response};
@@ -22,8 +23,12 @@ impl Swish {
         }
     }
 
-    pub fn swish(&mut self, path: &str, method: &str, handler: Handler) {
-        self.router.register(path, method, handler)
+    pub fn get(&mut self, path: &str, handler: Handler) {
+        self.router.register(path, Method::GET, handler)
+    }
+
+    pub fn post(&mut self, path: &str, handler: Handler) {
+        self.router.register(path, Method::POST, handler)
     }
 
     pub fn bish(&mut self) {

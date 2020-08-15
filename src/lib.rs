@@ -28,7 +28,7 @@ mod tests {
     #[should_panic]
     fn register_invalid_routing_test() {
         let mut swish = Swish::new();
-        swish.swish("/=?", "GET", path_handler);
+        swish.get("/=?", path_handler);
     }
 
     // #[test]
@@ -84,9 +84,9 @@ mod tests {
 
     fn swish2() -> Swish {
         let mut swish = Swish::new();
-        swish.swish("/path", "GET", path_handler);
-        swish.swish("/greet", "GET", greet_handler);
-        swish.swish("/user/:id", "GET", user_id_handler);
+        swish.get("/path", path_handler);
+        swish.get("/greet", greet_handler);
+        swish.get("/user/:id", user_id_handler);
         swish
     }
 }
