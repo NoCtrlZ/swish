@@ -28,7 +28,7 @@ I count the crime I committed. Karma‘s not a liar!
 - [x] Actual Http Responser
 - [x] Handler Returns Only Body With Chosing Content Type
 - [x] Support Post Request
-- [ ] Return Basic Header Like Content Lenght
+- [x] Return Basic Header Like Content Lenght
 - [ ] Cros Options
 - [ ] Http Request Validater
 - [ ] Version `0.1.0` Release
