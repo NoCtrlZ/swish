@@ -1,5 +1,4 @@
 use crate::config::{HeaderConfig, HTTP_VERSION};
-use crate::http::get_response_status_msg;
 use crate::http::StatusCode;
 use crate::request::Request;
 use crate::router::Handler;
@@ -22,7 +21,7 @@ impl Response {
         let mut response_data = self.header_conf.get_version();
         let status_and_body = format!(
             " {}\r\n{}\r\n\r\n{}",
-            get_response_status_msg(self.status_code.clone()),
+            self.status_code.get_response_prefix(),
             self.get_basic_header(self.body.len()),
             self.body
         );

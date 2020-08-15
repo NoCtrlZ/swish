@@ -18,6 +18,24 @@ impl StatusCode {
             _ => 500,
         }
     }
+
+    pub fn get_status_msg(&self) -> String {
+        match self {
+            &StatusCode::Ok => "OK".to_string(),
+            &StatusCode::BadRequest => "Bad Request".to_string(),
+            &StatusCode::NotFound => "Not Found".to_string(),
+            &StatusCode::InternalServerError => "Internal Server Error".to_string(),
+            _ => "Internal Server Error".to_string(),
+        }
+    }
+
+    pub fn get_response_prefix(&self) -> String {
+        format!(
+            "{} {}",
+            self.get_code_number().to_string(),
+            self.get_status_msg()
+        )
+    }
 }
 
 #[derive(Debug, PartialEq, Eq)]
@@ -25,16 +43,6 @@ pub enum Method {
     GET,
     POST,
     OTHER,
-}
-
-pub fn get_response_status_msg(code: StatusCode) -> String {
-    match code {
-        StatusCode::Ok => "200 OK".to_string(),
-        StatusCode::BadRequest => "400 Bad Request".to_string(),
-        StatusCode::NotFound => "404 Not Found".to_string(),
-        StatusCode::InternalServerError => "500 Internal Server Error".to_string(),
-        _ => "500 Internal Server Error".to_string(),
-    }
 }
 
 pub fn get_method(req_method: &str) -> Method {
@@ -50,13 +58,15 @@ mod tests {
     use super::*;
     #[test]
     fn get_status_msg_test() {
-        let msg1 = get_response_status_msg(StatusCode::Ok);
-        let msg2 = get_response_status_msg(StatusCode::BadRequest);
-        let msg3 = get_response_status_msg(StatusCode::NotFound);
-        let msg4 = get_response_status_msg(StatusCode::InternalServerError);
-        assert_eq!(msg1, "OK");
-        assert_eq!(msg2, "Bad Request");
-        assert_eq!(msg3, "Not Found");
-        assert_eq!(msg4, "Internal Server Error");
+        assert_eq!(StatusCode::Ok.get_response_prefix(), "200 OK");
+        assert_eq!(
+            StatusCode::BadRequest.get_response_prefix(),
+            "400 Bad Request"
+        );
+        assert_eq!(StatusCode::NotFound.get_response_prefix(), "404 Not Found");
+        assert_eq!(
+            StatusCode::InternalServerError.get_response_prefix(),
+            "500 Internal Server Error"
+        );
     }
 }
