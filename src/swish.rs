@@ -74,9 +74,10 @@ mod tests {
     use crate::json::Json;
     use crate::types::Body;
     use serde::{Deserialize, Serialize};
+    use serde_json::json;
 
     #[test]
-    fn response_test() {
+    fn get_response_test() {
         let mut tester = Tester::new(swish2());
         let res1 = tester.get("/path");
         let res2 = tester.get("/greet");
@@ -94,6 +95,17 @@ mod tests {
         assert_eq!(res7, "HTTP/1.1 200 OK\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n{\"code\":200,\"data\":\"user id is 23\"}");
     }
 
+    #[test]
+    fn post_response_test() {
+        let mut tester = Tester::new(swish2());
+        let sample = Sample {
+            code: 1,
+            data: "shinsaku".to_string(),
+        };
+        let res1 = tester.post("/user/register", Box::new(Json(sample)));
+        assert_eq!(res1, "HTTP/1.1 200 OK\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n{\"code\":200,\"data\":\"success register id: 1 msg: shinsaku\"}");
+    }
+
     pub struct Tester {
         server: Swish,
     }
@@ -109,6 +121,18 @@ mod tests {
                 path: path.to_string(),
                 header: "".to_string(),
                 body: "".to_string(),
+                param: "".to_string(),
+            };
+            let mut res = self.server.search(&mut req);
+            self.server.compose(&mut res)
+        }
+
+        pub fn post(&mut self, path: &str, body: Box<dyn Body>) -> String {
+            let mut req = Request {
+                method: Method::POST,
+                path: path.to_string(),
+                header: "".to_string(),
+                body: body.compile(),
                 param: "".to_string(),
             };
             let mut res = self.server.search(&mut req);
@@ -144,9 +168,15 @@ mod tests {
     }
 
     fn user_register_handler(req: &Request) -> Box<dyn Body> {
+        let sample: Sample =
+            serde_json::from_str(&req.body).expect("fail to convert transaction to json");
         Box::new(Json(Sample {
             code: 200,
-            data: format!("{}{}", "user id is ".to_string(), req.param),
+            data: format!(
+                "success register id: {} msg: {}",
+                sample.code.to_string(),
+                sample.data
+            ),
         }))
     }
 

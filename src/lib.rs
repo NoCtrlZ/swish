@@ -11,4 +11,3 @@ mod swish;
 mod types;
 
 extern crate regex;
-use serde::{Deserialize, Serialize};
