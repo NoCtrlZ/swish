@@ -1,10 +1,11 @@
 use std::net::TcpStream;
 
 use crate::entities::convert_buffer_to_string;
+use crate::http::{get_method, Method};
 
 #[derive(Debug)]
 pub struct Request {
-    pub method: String,
+    pub method: Method,
     pub path: String,
     pub header: String,
     pub body: String,
@@ -13,7 +14,7 @@ pub struct Request {
 
 impl Request {
     pub fn is_valid(&self) -> bool {
-        self.method != "" && self.path != ""
+        self.method != Method::OTHER && self.path != ""
     }
 
     pub fn set_param(&mut self, param: &str) {
@@ -57,15 +58,15 @@ fn devide_into_contents(req: &str) -> Vec<String> {
     components
 }
 
-fn get_method_and_path(req: &str) -> (String, String) {
+fn get_method_and_path(req: &str) -> (Method, String) {
     let mut components = req.split_whitespace();
     let method = match components.nth(0) {
-        Some(e) => e,
-        None => "",
+        Some(e) => get_method(e),
+        None => panic!("method can't be gotten"),
     };
     let path = match components.nth(0) {
         Some(e) => e,
         None => "",
     };
-    (method.to_string(), path.to_string())
+    (method, path.to_string())
 }

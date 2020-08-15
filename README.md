@@ -8,8 +8,9 @@ There are three rules I have when making this web flamework.
 - Don't have extra module
 - Don't be heavy
 ### What I want to say🏴‍☠️
-Sometime other Rust web flameworks can't be built because it has `dependencies with nightly modules`. Do we need to be an OSS committer? It's so ridiculous! And we also don't prefer to use left-pad packages. I'd like to say `We are programmer not OSS committer nor fucking copy paster!`
+Sometime other Rust web flameworks can't be built because it has `dependencies with nightly modules`. Do we need to be an OSS committer? It's so ridiculous! And we also don't prefer to use left-pad packages. Your game is tired! I'd like to say `We are programmer not OSS committer nor fucking copy paster!`
 ## Dependencies Except Std
+I count the crime I committed. Karma‘s not a liar!
 - regex
 - serde
 - serde_json
@@ -26,8 +27,8 @@ Sometime other Rust web flameworks can't be built because it has `dependencies w
 - [x] Actual Http Compiler
 - [x] Actual Http Responser
 - [x] Handler Returns Only Body With Chosing Content Type
-- [ ] Define Method And Status Code
 - [ ] Support Post Request
+- [ ] Define Method And Status Code
 - [ ] Return Basic Header Like Content Lenght
 - [ ] Cros Options
 - [ ] Http Request Validater
