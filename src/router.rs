@@ -33,13 +33,3 @@ impl Router {
         self.routes.push(route)
     }
 }
-
-pub fn handler_exec(handler: Handler, req: &Request, statud_code: u16) -> Response {
-    let body = (handler)(req);
-    Response {
-        status_code: statud_code,
-        ctype: body.get_content_type(),
-        header: "".to_string(),
-        body: body.compile(),
-    }
-}

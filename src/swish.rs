@@ -1,25 +1,25 @@
+use crate::config::HeaderConfig;
 use crate::entities::is_request_url;
-use crate::error::{is_invalid, not_found};
-use crate::global::Config;
+use crate::error::{is_invalid, is_not_found};
 use crate::http::Method;
 use crate::matcher::match_with;
 use crate::request::{parse, Request};
 use crate::response::{write, Response};
-use crate::router::{handler_exec, Handler, Router};
+use crate::router::{Handler, Router};
 
 use std::io::prelude::*;
 use std::net::{TcpListener, TcpStream};
 
 pub struct Swish {
     pub router: Router,
-    pub config: Config,
+    pub config: HeaderConfig,
 }
 
 impl Swish {
     pub fn new() -> Swish {
         Swish {
             router: Router { routes: Vec::new() },
-            config: Config::new(),
+            config: HeaderConfig::new(),
         }
     }
 
@@ -47,7 +47,7 @@ impl Swish {
     }
 
     fn compose(&self, res: &mut Response) -> String {
-        let header = format!("Content-Type: {}; {}", res.ctype, self.config.get_charset());
+        let mut header = format!("Content-Type: {}; {}", res.ctype, self.config.get_charset());
         res.set_header(&header);
         res.compile()
     }
@@ -56,14 +56,25 @@ impl Swish {
         if req.is_valid() && is_request_url(&req.path) {
             for route in &self.router.routes {
                 if match_with(&mut req, route) {
-                    return handler_exec(route.handler, &*req, 200);
+                    return self.handler_exec(route.handler, &*req);
                 } else {
                     continue;
                 };
             }
-            handler_exec(not_found, &*req, 404)
+            self.handler_exec(is_not_found, &*req)
         } else {
-            handler_exec(not_found, &*req, 400)
+            self.handler_exec(is_invalid, &*req)
+        }
+    }
+
+    fn handler_exec(&self, handler: Handler, req: &Request) -> Response {
+        let res_contents = (handler)(req);
+        Response {
+            status_code: res_contents.status(),
+            ctype: res_contents.content_type(),
+            header: "".to_string(),
+            body: res_contents.body(),
+            header_conf: self.config.clone(),
         }
     }
 }
@@ -86,7 +97,7 @@ mod tests {
         let res5 = tester.get("//gsaj");
         let res6 = tester.get("");
         let res7 = tester.get("/user/23");
-        assert_eq!(res1, "HTTP/1.1 200 OK\r\nContent-Type: application/json; charset=UTF-8\r\nContent-Length: 34\r\n\r\n{\"code\":200,\"data\":\"path request\"}");
+        assert_eq!(res1, "HTTP/1.1 404 Not Found\r\nContent-Type: application/json; charset=UTF-8\r\nContent-Length: 44\r\n\r\n{\"message\":\"page is not found\",\"status\":404}");
         assert_eq!(res2, "HTTP/1.1 200 OK\r\nContent-Type: application/json; charset=UTF-8\r\nContent-Length: 37\r\n\r\n{\"code\":200,\"data\":\"hi good morning\"}");
         assert_eq!(res3, "HTTP/1.1 404 Not Found\r\nContent-Type: application/json; charset=UTF-8\r\nContent-Length: 21\r\n\r\n{\"code\":404,\"msg\":\"\"}");
         assert_eq!(res4, "HTTP/1.1 400 Bad Request\r\nContent-Type: application/json; charset=UTF-8\r\nContent-Length: 21\r\n\r\n{\"code\":404,\"msg\":\"\"}");
@@ -132,7 +143,7 @@ mod tests {
                 method: Method::POST,
                 path: path.to_string(),
                 header: "".to_string(),
-                body: body.compile(),
+                body: body.body(),
                 param: "".to_string(),
             };
             let mut res = self.server.search(&mut req);

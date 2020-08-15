@@ -1,5 +1,6 @@
-use crate::global::HTTP_VERSION;
-use crate::http::get_status_code;
+use crate::config::{HeaderConfig, HTTP_VERSION};
+use crate::http::get_response_status_msg;
+use crate::http::StatusCode;
 use crate::request::Request;
 use crate::router::Handler;
 use crate::types::Body;
@@ -9,18 +10,19 @@ use std::net::TcpStream;
 
 #[derive(Debug)]
 pub struct Response {
-    pub status_code: u16,
+    pub status_code: StatusCode,
     pub ctype: String,
     pub header: String,
     pub body: String,
+    pub header_conf: HeaderConfig,
 }
 
 impl Response {
     pub fn compile(&self) -> String {
-        let mut response_data = HTTP_VERSION.to_string();
+        let mut response_data = self.header_conf.get_version();
         let status_and_body = format!(
             " {}\r\n{}\r\n\r\n{}",
-            get_status_code(self.status_code).compile(),
+            get_response_status_msg(self.status_code.clone()),
             self.get_basic_header(self.body.len()),
             self.body
         );
