@@ -36,7 +36,8 @@ impl Body for Error {
 
     fn body(&self) -> String {
         json!(ReturnError {
-            status: self.0.status_code.get_code_number(),
+            status: false,
+            code: self.0.status_code.get_code_number(),
             message: self.0.message.clone(),
         })
         .to_string()

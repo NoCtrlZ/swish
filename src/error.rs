@@ -17,7 +17,8 @@ pub struct ErrorContents {
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct ReturnError {
-    pub status: u16,
+    pub status: bool,
+    pub code: u16,
     pub message: String,
 }
 

@@ -97,12 +97,12 @@ mod tests {
         let res5 = tester.get("//gsaj");
         let res6 = tester.get("");
         let res7 = tester.get("/user/23");
-        assert_eq!(res1, "HTTP/1.1 404 Not Found\r\nContent-Type: application/json; charset=UTF-8\r\nContent-Length: 44\r\n\r\n{\"message\":\"page is not found\",\"status\":404}");
+        assert_eq!(res1, "HTTP/1.1 200 OK\r\nContent-Type: application/json; charset=UTF-8\r\nContent-Length: 34\r\n\r\n{\"code\":200,\"data\":\"path request\"}");
         assert_eq!(res2, "HTTP/1.1 200 OK\r\nContent-Type: application/json; charset=UTF-8\r\nContent-Length: 37\r\n\r\n{\"code\":200,\"data\":\"hi good morning\"}");
-        assert_eq!(res3, "HTTP/1.1 404 Not Found\r\nContent-Type: application/json; charset=UTF-8\r\nContent-Length: 21\r\n\r\n{\"code\":404,\"msg\":\"\"}");
-        assert_eq!(res4, "HTTP/1.1 400 Bad Request\r\nContent-Type: application/json; charset=UTF-8\r\nContent-Length: 21\r\n\r\n{\"code\":404,\"msg\":\"\"}");
-        assert_eq!(res5, "HTTP/1.1 400 Bad Request\r\nContent-Type: application/json; charset=UTF-8\r\nContent-Length: 21\r\n\r\n{\"code\":404,\"msg\":\"\"}");
-        assert_eq!(res6, "HTTP/1.1 400 Bad Request\r\nContent-Type: application/json; charset=UTF-8\r\nContent-Length: 21\r\n\r\n{\"code\":404,\"msg\":\"\"}");
+        assert_eq!(res3, "HTTP/1.1 404 Not Found\r\nContent-Type: application/json; charset=UTF-8\r\nContent-Length: 57\r\n\r\n{\"code\":404,\"message\":\"page is not found\",\"status\":false}");
+        assert_eq!(res4, "HTTP/1.1 400 Bad Request\r\nContent-Type: application/json; charset=UTF-8\r\nContent-Length: 60\r\n\r\n{\"code\":400,\"message\":\"request is not valid\",\"status\":false}");
+        assert_eq!(res5, "HTTP/1.1 400 Bad Request\r\nContent-Type: application/json; charset=UTF-8\r\nContent-Length: 60\r\n\r\n{\"code\":400,\"message\":\"request is not valid\",\"status\":false}");
+        assert_eq!(res6, "HTTP/1.1 400 Bad Request\r\nContent-Type: application/json; charset=UTF-8\r\nContent-Length: 60\r\n\r\n{\"code\":400,\"message\":\"request is not valid\",\"status\":false}");
         assert_eq!(res7, "HTTP/1.1 200 OK\r\nContent-Type: application/json; charset=UTF-8\r\nContent-Length: 35\r\n\r\n{\"code\":200,\"data\":\"user id is 23\"}");
     }
 
