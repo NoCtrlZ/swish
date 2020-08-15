@@ -27,12 +27,12 @@ I count the crime I committed. Karma‘s not a liar!
 - [x] Actual Http Compiler
 - [x] Actual Http Responser
 - [x] Handler Returns Only Body With Chosing Content Type
-- [ ] Support Post Request
-- [ ] Define Method And Status Code
+- [x] Support Post Request
 - [ ] Return Basic Header Like Content Lenght
 - [ ] Cros Options
 - [ ] Http Request Validater
-- [ ] Http Response Returner
+- [ ] Version `0.1.0` Release
+- [ ] Define Method And Status Code
 ## Test
 ```
 $ cargo test
