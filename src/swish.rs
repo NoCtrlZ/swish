@@ -86,13 +86,13 @@ mod tests {
         let res5 = tester.get("//gsaj");
         let res6 = tester.get("");
         let res7 = tester.get("/user/23");
-        assert_eq!(res1, "HTTP/1.1 200 OK\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n{\"code\":200,\"data\":\"path request\"}");
-        assert_eq!(res2, "HTTP/1.1 200 OK\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n{\"code\":200,\"data\":\"hi good morning\"}");
-        assert_eq!(res3, "HTTP/1.1 404 Not Found\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n{\"code\":404,\"msg\":\"\"}");
-        assert_eq!(res4, "HTTP/1.1 400 Bad Request\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n{\"code\":404,\"msg\":\"\"}");
-        assert_eq!(res5, "HTTP/1.1 400 Bad Request\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n{\"code\":404,\"msg\":\"\"}");
-        assert_eq!(res6, "HTTP/1.1 400 Bad Request\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n{\"code\":404,\"msg\":\"\"}");
-        assert_eq!(res7, "HTTP/1.1 200 OK\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n{\"code\":200,\"data\":\"user id is 23\"}");
+        assert_eq!(res1, "HTTP/1.1 200 OK\r\nContent-Type: application/json; charset=UTF-8\r\nContent-Length: 34\r\n\r\n{\"code\":200,\"data\":\"path request\"}");
+        assert_eq!(res2, "HTTP/1.1 200 OK\r\nContent-Type: application/json; charset=UTF-8\r\nContent-Length: 37\r\n\r\n{\"code\":200,\"data\":\"hi good morning\"}");
+        assert_eq!(res3, "HTTP/1.1 404 Not Found\r\nContent-Type: application/json; charset=UTF-8\r\nContent-Length: 21\r\n\r\n{\"code\":404,\"msg\":\"\"}");
+        assert_eq!(res4, "HTTP/1.1 400 Bad Request\r\nContent-Type: application/json; charset=UTF-8\r\nContent-Length: 21\r\n\r\n{\"code\":404,\"msg\":\"\"}");
+        assert_eq!(res5, "HTTP/1.1 400 Bad Request\r\nContent-Type: application/json; charset=UTF-8\r\nContent-Length: 21\r\n\r\n{\"code\":404,\"msg\":\"\"}");
+        assert_eq!(res6, "HTTP/1.1 400 Bad Request\r\nContent-Type: application/json; charset=UTF-8\r\nContent-Length: 21\r\n\r\n{\"code\":404,\"msg\":\"\"}");
+        assert_eq!(res7, "HTTP/1.1 200 OK\r\nContent-Type: application/json; charset=UTF-8\r\nContent-Length: 35\r\n\r\n{\"code\":200,\"data\":\"user id is 23\"}");
     }
 
     #[test]
@@ -103,7 +103,7 @@ mod tests {
             data: "shinsaku".to_string(),
         };
         let res1 = tester.post("/user/register", Box::new(Json(sample)));
-        assert_eq!(res1, "HTTP/1.1 200 OK\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n{\"code\":200,\"data\":\"success register id: 1 msg: shinsaku\"}");
+        assert_eq!(res1, "HTTP/1.1 200 OK\r\nContent-Type: application/json; charset=UTF-8\r\nContent-Length: 58\r\n\r\n{\"code\":200,\"data\":\"success register id: 1 msg: shinsaku\"}");
     }
 
     pub struct Tester {
