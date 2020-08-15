@@ -21,7 +21,7 @@ impl Response {
         let status_and_body = format!(
             " {}\r\n{}\r\n\r\n{}",
             get_status_code(self.status_code).compile(),
-            self.header,
+            self.get_basic_header(self.body.len()),
             self.body
         );
         response_data.push_str(&status_and_body);
@@ -30,6 +30,10 @@ impl Response {
 
     pub fn set_header(&mut self, header: &str) {
         self.header = header.to_string()
+    }
+
+    fn get_basic_header(&self, body_length: usize) -> String {
+        format!("{}\r\nContent-Length: {}", self.header, body_length)
     }
 }
 
