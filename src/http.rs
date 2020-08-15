@@ -1,7 +1,23 @@
-#[derive(Debug)]
-pub struct StatusCode {
-    pub code: u16,
-    pub msg: String,
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub enum StatusCode {
+    Ok,
+    BadRequest,
+    NotFound,
+    InternalServerError,
+}
+
+impl StatusCode {
+    pub fn get_code_number(&self) -> u16 {
+        match self {
+            &StatusCode::Ok => 200,
+            &StatusCode::BadRequest => 400,
+            &StatusCode::NotFound => 404,
+            &StatusCode::InternalServerError => 500,
+            _ => 500,
+        }
+    }
 }
 
 #[derive(Debug, PartialEq, Eq)]
@@ -11,34 +27,13 @@ pub enum Method {
     OTHER,
 }
 
-impl StatusCode {
-    pub fn compile(self) -> String {
-        let mut prefix = self.code.to_string();
-        prefix.push_str(" ");
-        prefix.push_str(&self.msg);
-        prefix
-    }
-}
-
-pub fn get_status_code(code: u16) -> StatusCode {
-    match get_status_msg(code) {
-        Ok(msg) => StatusCode {
-            code: code,
-            msg: msg,
-        },
-        Err(msg) => StatusCode {
-            code: 500,
-            msg: msg,
-        },
-    }
-}
-
-fn get_status_msg(code: u16) -> Result<String, String> {
+pub fn get_response_status_msg(code: StatusCode) -> String {
     match code {
-        200 => Ok("OK".to_string()),
-        400 => Ok("Bad Request".to_string()),
-        404 => Ok("Not Found".to_string()),
-        _ => Err("Internal Server Error".to_string()),
+        StatusCode::Ok => "200 OK".to_string(),
+        StatusCode::BadRequest => "400 Bad Request".to_string(),
+        StatusCode::NotFound => "404 Not Found".to_string(),
+        StatusCode::InternalServerError => "500 Internal Server Error".to_string(),
+        _ => "500 Internal Server Error".to_string(),
     }
 }
 
@@ -55,20 +50,13 @@ mod tests {
     use super::*;
     #[test]
     fn get_status_msg_test() {
-        let msg1 = unwrap_msg(get_status_msg(200));
-        let msg2 = unwrap_msg(get_status_msg(400));
-        let msg3 = unwrap_msg(get_status_msg(404));
-        let msg4 = unwrap_msg(get_status_msg(600));
+        let msg1 = get_response_status_msg(StatusCode::Ok);
+        let msg2 = get_response_status_msg(StatusCode::BadRequest);
+        let msg3 = get_response_status_msg(StatusCode::NotFound);
+        let msg4 = get_response_status_msg(StatusCode::InternalServerError);
         assert_eq!(msg1, "OK");
         assert_eq!(msg2, "Bad Request");
         assert_eq!(msg3, "Not Found");
         assert_eq!(msg4, "Internal Server Error");
-    }
-
-    fn unwrap_msg(res: Result<String, String>) -> String {
-        match res {
-            Ok(msg) => msg,
-            Err(msg) => msg,
-        }
     }
 }

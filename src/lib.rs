@@ -1,6 +1,6 @@
+mod config;
 mod entities;
 mod error;
-mod global;
 mod http;
 mod json;
 mod matcher;
