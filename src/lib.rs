@@ -1,4 +1,5 @@
 mod config;
+mod cors;
 mod entities;
 mod error;
 mod http;
