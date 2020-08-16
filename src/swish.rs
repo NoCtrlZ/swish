@@ -1,4 +1,5 @@
 use crate::config::HeaderConfig;
+use crate::cors::Cors;
 use crate::entities::is_request_url;
 use crate::error::{is_invalid, is_not_found};
 use crate::http::Method;
@@ -13,6 +14,7 @@ use std::net::{TcpListener, TcpStream};
 pub struct Swish {
     pub router: Router,
     pub config: HeaderConfig,
+    pub cors: Cors,
 }
 
 impl Swish {
@@ -20,6 +22,7 @@ impl Swish {
         Swish {
             router: Router { routes: Vec::new() },
             config: HeaderConfig::new(),
+            cors: Default::default(),
         }
     }
 
@@ -29,6 +32,10 @@ impl Swish {
 
     pub fn post(&mut self, path: &str, handler: Handler) {
         self.router.register(path, Method::POST, handler)
+    }
+
+    pub fn swish(&mut self, cors: Cors) {
+        self.cors = cors
     }
 
     pub fn bish(&mut self) {

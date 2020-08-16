@@ -8,7 +8,7 @@ There are three rules I have when making this web flamework.
 - Don't have extra module
 - Don't be heavy
 ### What I want to say🏴‍☠️
-Sometime other Rust web flameworks can't be built because it has `dependencies with nightly modules`. Do we need to be an OSS committer? It's so ridiculous! And we also don't prefer to use left-pad packages. Your game is tired! I'd like to say `We are programmer not OSS committer nor fucking copy paster!`
+Sometime other Rust web flameworks can't be built when it's compiled for production because of `dependencies with nightly modules`. Do we need to be an OSS committer? And we also don't prefer to use left-pad packages. An old coupon expired! I'd like to say `We are programmer not OSS committer nor fucking copy paster!`
 ## Dependencies Except Std
 I count the crime I committed. Karma‘s not a liar!
 - regex
@@ -33,7 +33,7 @@ I count the crime I committed. Karma‘s not a liar!
 - [ ] Http Request Validater
 - [ ] Refactoring According To [Here](https://github.com/NoCtrlZ/swish/blob/master/CONTRIBUTE.md)
 - [ ] Version `0.1.0` Release
-- [ ] Define Method And Status Code
+- [ ] Define All Method And Status Code
 ## Test
 ```
 $ cargo test
