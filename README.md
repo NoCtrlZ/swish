@@ -29,7 +29,7 @@ I count the crime I committed. Karma‘s not a liar!
 - [x] Handler Returns Only Body With Chosing Content Type
 - [x] Support Post Request
 - [x] Return Basic Header Like Content Lenght
-- [ ] Cros Options
+- [x] Cros Options
 - [ ] Http Request Validater
 - [ ] Refactoring According To [Here](https://github.com/NoCtrlZ/swish/blob/master/CONTRIBUTE.md)
 - [ ] Version `0.1.0` Release
