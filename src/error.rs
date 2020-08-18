@@ -35,6 +35,13 @@ pub fn is_invalid(req: &Request) -> Box<dyn Body> {
     }))
 }
 
+pub fn is_unauthorized(req: &Request) -> Box<dyn Body> {
+    Box::new(Error(ErrorContents {
+        status_code: StatusCode::Unauthorized,
+        message: "header is not accepted".to_string(),
+    }))
+}
+
 pub fn is_not_found(req: &Request) -> Box<dyn Body> {
     Box::new(Error(ErrorContents {
         status_code: StatusCode::NotFound,

@@ -13,10 +13,14 @@
 - [ ] Write unit test and integration test separately.
 - [ ] Box trait dyn should be replaced with enum.
 - [ ] Add method field to router to optimize algorithm.
-- [ ] Return content length.
+- [ ] Return date.
 - [ ] Header should be hashmap.
-- [ ] Add config struct to response to compile header.
-- [ ] Mather should be in router.
+- [ ] Matcher should be in router.
+- [ ] Types should be named other name.
+- [ ] Config should be replaced with header.
+- [ ] Validater should be in request module.
+- [ ] Request field param should be Option.
+- [ ] Change name according to clean code.
 ## Feature
 - [ ] DBMS client.
 - [ ] Mailer client.
