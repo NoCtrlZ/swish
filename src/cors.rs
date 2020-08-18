@@ -22,27 +22,27 @@ impl Cors {
         }
         match &self.access_control_allow_headers {
             Some(headers) => {
-                let (is_allowed_origin, msg) = self.validate_headers(&req, headers);
-                if !is_allowed_origin {
-                    return (is_allowed_origin, msg);
+                let (is_allowed_headers, msg) = self.validate_headers(&req, headers);
+                if !is_allowed_headers {
+                    return (is_allowed_headers, msg);
                 }
             }
             None => (),
         }
         match &self.access_control_allow_methods {
             Some(methods) => {
-                let (is_allowed_origin, msg) = self.validate_methods(&req, methods);
-                if !is_allowed_origin {
-                    return (is_allowed_origin, msg);
+                let (is_allowed_methods, msg) = self.validate_methods(&req, methods);
+                if !is_allowed_methods {
+                    return (is_allowed_methods, msg);
                 }
             }
             None => (),
         }
         match &self.access_control_allow_credential {
             Some(credential) => {
-                let (is_allowed_origin, msg) = self.validate_credential(&req, credential);
-                if !is_allowed_origin {
-                    return (is_allowed_origin, msg);
+                let (is_allowed_credential, msg) = self.validate_credential(&req, credential);
+                if !is_allowed_credential {
+                    return (is_allowed_credential, msg);
                 }
             }
             None => (),
@@ -70,5 +70,14 @@ impl Cors {
 
     fn validate_credential(&self, req: &Request, credential: &bool) -> (bool, String) {
         (true, "ok".to_string())
+    }
+}
+
+pub fn allow_everything() -> Cors {
+    Cors {
+        access_control_allow_origin: None,
+        access_control_allow_headers: None,
+        access_control_allow_methods: None,
+        access_control_allow_credential: None,
     }
 }
