@@ -1,7 +1,7 @@
 use crate::config::HeaderConfig;
 use crate::cors::Cors;
 use crate::entities::is_request_url;
-use crate::error::{is_invalid, is_not_found};
+use crate::error::{is_invalid, is_not_found, is_unauthorized};
 use crate::http::Method;
 use crate::matcher::match_with;
 use crate::request::{parse, Request};
@@ -14,7 +14,7 @@ use std::net::{TcpListener, TcpStream};
 pub struct Swish {
     pub router: Router,
     pub config: HeaderConfig,
-    pub cors: Cors,
+    pub cors: Option<Cors>,
 }
 
 impl Swish {
@@ -35,7 +35,7 @@ impl Swish {
     }
 
     pub fn swish(&mut self, cors: Cors) {
-        self.cors = cors
+        self.cors = Some(cors)
     }
 
     pub fn bish(&mut self) {
@@ -48,7 +48,20 @@ impl Swish {
     fn handle(&mut self, stream: &mut TcpStream) {
         let mut req = parse(stream);
         println!("{:?}", req);
-        let mut res = self.search(&mut req);
+        if self.cors.is_some() {
+            let mut res = self.search(&mut req);
+        }
+        let mut res = match &self.cors {
+            Some(e) => {
+                let (isValid, msg) = e.validate_request(&req);
+                if isValid {
+                    self.search(&mut req)
+                } else {
+                    self.handler_exec(is_unauthorized, &req)
+                }
+            }
+            None => self.search(&mut req),
+        };
         let contents = self.compose(&mut res);
         write(&contents, stream)
     }

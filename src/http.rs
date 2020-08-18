@@ -4,6 +4,7 @@ use serde::{Deserialize, Serialize};
 pub enum StatusCode {
     Ok,
     BadRequest,
+    Unauthorized,
     NotFound,
     InternalServerError,
 }
@@ -13,6 +14,7 @@ impl StatusCode {
         match self {
             &StatusCode::Ok => 200,
             &StatusCode::BadRequest => 400,
+            &StatusCode::Unauthorized => 401,
             &StatusCode::NotFound => 404,
             &StatusCode::InternalServerError => 500,
             _ => 500,
@@ -23,6 +25,7 @@ impl StatusCode {
         match self {
             &StatusCode::Ok => "OK".to_string(),
             &StatusCode::BadRequest => "Bad Request".to_string(),
+            &StatusCode::Unauthorized => "Unauthorized".to_string(),
             &StatusCode::NotFound => "Not Found".to_string(),
             &StatusCode::InternalServerError => "Internal Server Error".to_string(),
             _ => "Internal Server Error".to_string(),
