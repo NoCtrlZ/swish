@@ -53,8 +53,8 @@ impl Swish {
         }
         let mut res = match &self.cors {
             Some(e) => {
-                let (isValid, msg) = e.validate_request(&req);
-                if isValid {
+                let (is_valid, msg) = e.validate_request(&req);
+                if is_valid {
                     self.search(&mut req)
                 } else {
                     self.handler_exec(is_unauthorized, &req)
