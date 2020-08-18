@@ -37,8 +37,7 @@ pub fn parse(stream: &mut TcpStream) -> Request {
     let req = convert_buffer_to_string(stream);
     println!("{:?}", req);
     let (header, body) = devide_header_and_body(&req);
-    let contents = devide_into_contents(&header.prefix);
-    let (method, path) = get_method_and_path(&contents[0]);
+    let (method, path) = get_method_and_path(&header.prefix);
     Request {
         method: method,
         path: path,
@@ -79,14 +78,6 @@ fn convert_header_text_to_struct(header_text: &str) -> Header {
         prefix: components[0].clone(),
         header: header,
     }
-}
-
-fn devide_into_contents(req: &str) -> Vec<String> {
-    let components: Vec<String> = req.split("\r\n").map(|s| s.to_string()).collect();
-    if components.len() < 2 {
-        panic!("invalid request: header or prefix doesn't exist")
-    }
-    components
 }
 
 fn get_method_and_path(req: &str) -> (Method, String) {

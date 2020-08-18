@@ -14,13 +14,13 @@
 - [ ] Box trait dyn should be replaced with enum.
 - [ ] Add method field to router to optimize algorithm.
 - [ ] Return date.
-- [ ] Header should be hashmap.
 - [ ] Matcher should be in router.
 - [ ] Types should be named other name.
 - [ ] Config should be replaced with header.
 - [ ] Validater should be in request module.
 - [ ] Request field param should be Option.
 - [ ] Change name according to clean code.
+- [ ] Error handling all function.
 ## Feature
 - [ ] DBMS client.
 - [ ] Mailer client.
