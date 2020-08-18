@@ -67,6 +67,11 @@ impl Cors {
     }
 
     fn validate_headers(&self, req: &Request, headers: &Vec<String>) -> (bool, String) {
+        for (header, _) in &req.header.elements {
+            if !headers.contains(&header) {
+                return (false, "header is not allowed".to_string());
+            }
+        }
         (true, "ok".to_string())
     }
 
