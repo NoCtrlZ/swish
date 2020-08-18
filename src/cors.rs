@@ -51,7 +51,18 @@ impl Cors {
     }
 
     // This should be macro
-    fn validate_origin(&self, req: &Request, origin: &Vec<String>) -> (bool, String) {
+    fn validate_origin(&self, req: &Request, origins: &Vec<String>) -> (bool, String) {
+        match req.header.elements.get("Host") {
+            Some(origin) => {
+                for allowed_origin in origins {
+                    if origin == allowed_origin {
+                        return (true, "ok".to_string());
+                    }
+                }
+                return (false, "origin is not allowed".to_string());
+            }
+            None => return (false, "invalid shaddy request".to_string()),
+        }
         (true, "ok".to_string())
     }
 
@@ -65,7 +76,7 @@ impl Cors {
                 return (true, "ok".to_string());
             }
         }
-        (false, "method not allowed".to_string())
+        (false, "method is not allowed".to_string())
     }
 
     fn validate_credential(&self, req: &Request, credential: &bool) -> (bool, String) {

@@ -16,7 +16,7 @@ pub struct Request {
 #[derive(Debug)]
 pub struct Header {
     prefix: String,
-    header: HashMap<String, String>,
+    pub elements: HashMap<String, String>,
 }
 
 impl Request {
@@ -76,7 +76,7 @@ fn convert_header_text_to_struct(header_text: &str) -> Header {
     }
     Header {
         prefix: components[0].clone(),
-        header: header,
+        elements: header,
     }
 }
 

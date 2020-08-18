@@ -22,10 +22,10 @@ mod tests {
     use serde::{Deserialize, Serialize};
     use serde_json::json;
 
-    #[test]
-    fn setup_server() {
-        swish_swish().bish()
-    }
+    // #[test]
+    // fn setup_server() {
+    //     swish_swish().bish()
+    // }
 
     #[derive(Deserialize, Serialize)]
     struct Sample {
