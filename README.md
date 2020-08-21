@@ -1,5 +1,6 @@
 # Swish
-![Rust Cargo Test](https://github.com/NoCtrlZ/swish/workflows/Rust%20Cargo%20Test/badge.svg?branch=master)  
+[![crates.io badge](https://img.shields.io/crates/v/swish_swish.svg)](https://crates.io/crates/swish_swish)
+![Build Test](https://github.com/NoCtrlZ/swish/workflows/Rust%20Cargo%20Test/badge.svg?branch=master)  
 This Is The Beef Web Flamework For R**ket🥩 Swish Swish Bish🎶 Another One In The Basket🏀
 ## Abstract
 ### Three rules🔔

@@ -11,11 +11,11 @@ mod router;
 mod swish;
 mod types;
 
-use crate::cors::Cors;
-use crate::json::Json;
-use crate::request::Request;
-use crate::swish::Swish;
-use crate::types::Body;
+pub use crate::cors::Cors;
+pub use crate::json::Json;
+pub use crate::request::Request;
+pub use crate::swish::Swish;
+pub use crate::types::Body;
 
 #[cfg(test)]
 mod tests {
