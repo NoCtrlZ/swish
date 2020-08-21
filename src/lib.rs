@@ -11,16 +11,17 @@ mod router;
 mod swish;
 mod types;
 
-extern crate regex;
+use crate::cors::Cors;
+use crate::json::Json;
+use crate::request::Request;
+use crate::swish::Swish;
+use crate::types::Body;
 
 #[cfg(test)]
 mod tests {
-    use crate::json::Json;
-    use crate::request::Request;
-    use crate::swish::Swish;
-    use crate::types::Body;
+    use super::*;
+    extern crate regex;
     use serde::{Deserialize, Serialize};
-    use serde_json::json;
 
     // #[test]
     // fn setup_server() {
