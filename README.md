@@ -2,6 +2,23 @@
 [![crates.io badge](https://img.shields.io/crates/v/swish_swish.svg)](https://crates.io/crates/swish_swish)
 ![Build Test](https://github.com/NoCtrlZ/swish/workflows/Rust%20Cargo%20Test/badge.svg?branch=master)  
 This Is The Beef Web Flamework For R**ket🥩 Swish Swish Bish🎶 Another One In The Basket🏀
+```rust
+extern crate swish_swish;
+
+use swish_swish::*;
+
+fn swish_swish() -> Swish {
+    let mut swish = Swish::new();
+    swish.get("/path", path_handler);
+    swish.get("/user/:id", user_id_handler);
+    swish.post("/user/register", user_register_handler);
+    swish
+}
+
+fn main() {
+    swish_swish().bish();
+}
+```
 ## Abstract
 ### Three rules🔔
 There are three rules I have when making this web flamework.
