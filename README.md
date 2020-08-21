@@ -19,6 +19,7 @@ fn main() {
     swish_swish().bish();
 }
 ```
+Full Demo Application Is [Here](https://github.com/NoCtrlZ/swish/blob/master/test/server)🎱
 ## Abstract
 ### Three rules🔔
 There are three rules I have when making this web flamework.
@@ -49,7 +50,7 @@ I count the crime I committed. Karma‘s not a liar!
 - [x] Return Basic Header Like Content Lenght
 - [x] Cros Options
 - [x] Http Request Validater
-- [ ] Version `0.1.0` Release
+- [x] Version `0.1.0` Release
 - [ ] Integration Test
 - [ ] Refactoring According To [Here](https://github.com/NoCtrlZ/swish/blob/master/CONTRIBUTE.md)
 - [ ] Define All Method And Status Code
