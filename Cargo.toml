@@ -1,11 +1,10 @@
 [package]
-name = "swish"
+name = "swish_swish"
 version = "0.1.0"
 authors = ["NoCtrlZ <phantomofrotten@gmail.com>"]
 description = "Rust Web Framework With No Dependencies With Nightly Modules"
 edition = "2018"
 license = "MIT"
-license-file = "LICENSE"
 readme = "README.md"
 documentation = "https://github.com/NoCtrlZ/swish"
 repository = "https://github.com/NoCtrlZ/swish"
