@@ -9,4 +9,4 @@ RUN apk add --update --upgrade \
     npm=12.18.3-r0 && \
     (cd client && npm i --production)
 
-ENTRYPOINT [ "sh", "integration_test.sh" ]
+ENTRYPOINT [ "bash", "integration_test.sh" ]
