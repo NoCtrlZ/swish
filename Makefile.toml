@@ -9,7 +9,7 @@ git config core.hooksPath .githooks
 description = "Run Integration Test"
 script = ['''
 #!/usr/bin/env bash
-sh test/integration_test.sh
+cd test && docker-compose up
 ''']
 
 [tasks.ut]
