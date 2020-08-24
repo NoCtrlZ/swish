@@ -5,34 +5,33 @@ describe('Swish Swish Integration Test', () => {
     it('Static Get Request', async () => {
         const res = await client.get('/path').catch(e => console.log(e))
         const { status, data } = res;
+        console.log(res)
 
-        expect(status).toStrictEqual(true);
-        expect(data.code).toStrictEqual(200);
-        expect(data.data).toStrictEqual('path request');
+        expect(status).toStrictEqual(false);
+        expect(data.code).toStrictEqual(401);
+        expect(data.message).toStrictEqual('header is not accepted');
     });
 
     it('Dynamic Get Request', async () => {
         const res = await client.get('/user/shinsaku').catch(e => console.log(e))
         const { status, data } = res;
 
-        expect(status).toStrictEqual(true);
-        expect(data.code).toStrictEqual(200);
-        expect(data.data).toStrictEqual('user id is shinsaku');
+        expect(status).toStrictEqual(false);
+        expect(data.code).toStrictEqual(401);
+        expect(data.message).toStrictEqual('header is not accepted');
     });
 
     it('Normal Post Request', async () => {
         const sample = {
-            code: 200,
+            code: 401,
             data: 'hello'
         };
 
         const res = await client.post('/user/register', sample)
         const { status, data } = res;
 
-        expect(status).toStrictEqual(true);
-        expect(data.code).toStrictEqual(200);
-        expect(data.data).toStrictEqual(
-            `success register id: ${sample.code} msg: ${sample.data}`
-        );
+        expect(status).toStrictEqual(false);
+        expect(data.code).toStrictEqual(401);
+        expect(data.message).toStrictEqual('header is not accepted');
     });
 });
