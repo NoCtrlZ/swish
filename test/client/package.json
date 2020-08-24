@@ -5,13 +5,14 @@
     "main": "index.js",
     "scripts": {
         "fix": "prettier --write *.js",
-        "test": "jest"
+        "test": "yarn && jest"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "hear_me_roar": "^0.1.6"
+        "hear_me_roar": "^0.1.6",
+        "lint-staged": "^10.2.11"
     },
     "devDependencies": {
         "husky": "^4.2.5",
