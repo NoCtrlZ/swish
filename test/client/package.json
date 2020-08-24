@@ -1,31 +1,32 @@
 {
-  "name": "client",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "jest"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "hear_me_roar": "^0.1.6"
-  },
-  "devDependencies": {
-    "husky": "^4.2.5",
-    "jest": "^26.4.2",
-    "prettier": "^2.0.5"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
+    "name": "client",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "fix": "prettier --write *.js",
+        "test": "jest"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "hear_me_roar": "^0.1.6"
+    },
+    "devDependencies": {
+        "husky": "^4.2.5",
+        "jest": "^26.4.2",
+        "prettier": "^2.0.5"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.js": [
+            "prettier --write src",
+            "git add"
+        ]
     }
-  },
-  "lint-staged": {
-    "*.js": [
-      "prettier --write src",
-      "git add"
-    ]
-  }
 }
