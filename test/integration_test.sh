@@ -1,5 +1,6 @@
 #!/bin/sh
 
+declare -a Tests=()
 declare -a Tests=("normal" "cors")
 
 i=0
