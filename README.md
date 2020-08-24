@@ -51,7 +51,8 @@ I count the crime I committed. Karma‘s not a liar!
 - [x] Cros Options
 - [x] Http Request Validater
 - [x] Version `0.1.0` Release
-- [ ] Integration Test
+- [x] Integration Test
+- [ ] Anti Pattern Test
 - [ ] Refactoring According To [Here](https://github.com/NoCtrlZ/swish/blob/master/CONTRIBUTE.md)
 - [ ] Define All Method And Status Code
 ## Test
