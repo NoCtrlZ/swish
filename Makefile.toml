@@ -10,6 +10,7 @@ description = "Run Test"
 script = ['''
 #!/usr/bin/env bash
 cargo test -- --nocapture
+(cd test/server && cargo build)
 ''']
 
 [tasks.pub]
