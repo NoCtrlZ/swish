@@ -1,5 +1,5 @@
-# Demo Application
-## Setup
+# Integration Test
+## Test
 ```
-$ cargo run
+$ sh integration_test.sh
 ```

@@ -5,6 +5,13 @@ script = ['''
 git config core.hooksPath .githooks
 ''']
 
+[tasks.it]
+description = "Run Integration Test"
+script = ['''
+#!/usr/bin/env bash
+sh test/integration_test.sh
+''']
+
 [tasks.ut]
 description = "Run Test"
 script = ['''
@@ -18,25 +25,4 @@ description = "Publish Module"
 script = ['''
 #!/usr/bin/env bash
 cargo publish
-''']
-
-[tasks.get1]
-description = "Get /path"
-script = ['''
-#!/usr/bin/env bash
-curl localhost:3000/path
-''']
-
-[tasks.get2]
-description = "Get /user/23"
-script = ['''
-#!/usr/bin/env bash
-curl localhost:3000/user/23
-''']
-
-[tasks.get3]
-description = "Get invalid path"
-script = ['''
-#!/usr/bin/env bash
-curl localhost:3000/*0---
 ''']

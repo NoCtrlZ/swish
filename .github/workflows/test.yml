@@ -13,6 +13,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Install Makers
+      run: cargo install --force cargo-make
 
     - name: Integration Test
-      run: sh test/integration_test.sh
+      run: makers it
