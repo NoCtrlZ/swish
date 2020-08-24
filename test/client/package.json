@@ -12,11 +12,11 @@
     "license": "ISC",
     "dependencies": {
         "hear_me_roar": "^0.1.6",
-        "lint-staged": "^10.2.11"
+        "jest": "^26.4.2"
     },
     "devDependencies": {
         "husky": "^4.2.5",
-        "jest": "^26.4.2",
+        "lint-staged": "^10.2.11",
         "prettier": "^2.0.5"
     },
     "husky": {

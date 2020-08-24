@@ -1,5 +1,5 @@
 const Client = require('hear_me_roar').default;
-const client = new Client('server', 3000);
+const client = new Client('localhost', 3000);
 
 describe('Swish Swish Integration Test', () => {
     it('Static Get Request', async () => {

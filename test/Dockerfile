@@ -7,7 +7,7 @@ RUN apk add --update --upgrade \
     cargo=1.44.0-r0 \
     nodejs=12.18.3-r0 \
     npm=12.18.3-r0 && \
-    (cd client && npm i) &&\
+    (cd client && npm i --production) &&\
     (cd server && cargo build)
 
 ENTRYPOINT [ "sh", "integration_test.sh" ]
