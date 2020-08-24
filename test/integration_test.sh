@@ -1,7 +1,6 @@
 #!/bin/sh
 
-declare -a Tests=()
-declare -a Tests=("normal" "cors")
+Tests=("normal" "cors")
 
 i=0
 for test in ${Test[*]}; do
