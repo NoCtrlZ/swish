@@ -5,6 +5,13 @@ mod sample;
 use swish_swish::*;
 use sample::{path_handler, user_id_handler, user_register_handler};
 
+fn defined_like_this() -> Cors {
+    Cors {
+        access_control_allow_origin: Some(["nothing"]),
+        ..Default::default()
+    }
+}
+
 fn swish_swish() -> Swish {
     let mut swish = Swish::new();
     swish.get("/path", path_handler);
