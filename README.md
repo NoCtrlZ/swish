@@ -12,6 +12,7 @@ fn swish_swish() -> Swish {
     swish.get("/path", path_handler);
     swish.get("/user/:id", user_id_handler);
     swish.post("/user/register", user_register_handler);
+    swish.set_cors_as(allow_everything());
     swish
 }
 
@@ -54,6 +55,8 @@ I count the crime I committed. Karma‘s not a liar!
 - [x] Integration Test
 - [ ] Anti Pattern Test
 - [ ] Refactoring According To [Here](https://github.com/NoCtrlZ/swish/blob/master/CONTRIBUTE.md)
+- [ ] Get Method And Path From Attribute
+- [ ] Version `1.0.0` Release
 - [ ] Define All Method And Status Code
 ## Test
 ```
