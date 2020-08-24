@@ -11,7 +11,7 @@ mod router;
 mod swish;
 mod types;
 
-pub use crate::cors::Cors;
+pub use crate::cors::{allow_everything, Cors};
 pub use crate::json::Json;
 pub use crate::request::Request;
 pub use crate::swish::Swish;
