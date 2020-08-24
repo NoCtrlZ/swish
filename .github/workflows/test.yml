@@ -14,4 +14,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Integration Test
-        cd test && docker-compose up
+      run: cd test && docker-compose up
