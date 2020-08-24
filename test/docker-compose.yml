@@ -1,20 +1,9 @@
 version: '3'
 services:
-  client:
-    build: ./client
-    container_name: client
+  test:
+    build: .
+    container_name: test
     tty: true
     stdin_open: true
     volumes:
-      - ./client:/app
-      - /app/node_modules
-  server:
-    build: ./server
-    container_name: server
-    tty: true
-    stdin_open: true
-    volumes:
-      - ./server:/app
-      - /app/target
-    ports:
-      - "3000:3000"
+      - .:/app
