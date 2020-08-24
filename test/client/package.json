@@ -13,6 +13,19 @@
     "hear_me_roar": "^0.1.6"
   },
   "devDependencies": {
-    "jest": "^26.4.2"
+    "husky": "^4.2.5",
+    "jest": "^26.4.2",
+    "prettier": "^2.0.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write src",
+      "git add"
+    ]
   }
 }
