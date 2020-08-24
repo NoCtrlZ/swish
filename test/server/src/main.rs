@@ -1,14 +1,19 @@
 extern crate swish_swish;
 
 use swish_swish::*;
-use serde_json::json;
+use swish_swish::cors::allow_everything;
 use serde::{Deserialize, Serialize};
+
+fn cors() -> Cors {
+    allow_everything()
+}
 
 fn swish_swish() -> Swish {
     let mut swish = Swish::new();
     swish.get("/path", path_handler);
     swish.get("/user/:id", user_id_handler);
     swish.post("/user/register", user_register_handler);
+    swish.swish(cors());
     swish
 }
 
@@ -23,7 +28,7 @@ struct Sample {
     data: String,
 }
 
-fn path_handler(req: &Request) -> Box<dyn Body> {
+fn path_handler(_: &Request) -> Box<dyn Body> {
     Box::new(Json(Sample {
         code: 200,
         data: "path request".to_string(),
