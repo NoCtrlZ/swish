@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "hear_me_roar": "^0.1.6"
+  },
+  "devDependencies": {
+    "jest": "^26.4.2"
   }
 }
