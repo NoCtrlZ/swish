@@ -90,9 +90,6 @@ impl Cors {
 
 pub fn allow_everything() -> Cors {
     Cors {
-        access_control_allow_origin: None,
-        access_control_allow_headers: None,
-        access_control_allow_methods: None,
-        access_control_allow_credential: None,
+        ..Default::default()
     }
 }
