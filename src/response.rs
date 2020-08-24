@@ -1,7 +1,6 @@
-use crate::config::{HeaderConfig, HTTP_VERSION};
+use crate::config::HeaderConfig;
 use crate::http::StatusCode;
-use crate::request::Request;
-use crate::router::Handler;
+// todo should be in Response body field
 use crate::types::Body;
 
 use std::io::prelude::*;

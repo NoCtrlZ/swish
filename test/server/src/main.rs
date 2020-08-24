@@ -1,7 +1,6 @@
 extern crate swish_swish;
 
 use swish_swish::*;
-use swish_swish::cors::allow_everything;
 use serde::{Deserialize, Serialize};
 
 fn cors() -> Cors {
@@ -13,7 +12,7 @@ fn swish_swish() -> Swish {
     swish.get("/path", path_handler);
     swish.get("/user/:id", user_id_handler);
     swish.post("/user/register", user_register_handler);
-    swish.swish(cors());
+    swish.set(cors());
     swish
 }
 

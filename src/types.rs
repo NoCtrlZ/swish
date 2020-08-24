@@ -1,4 +1,4 @@
-use crate::error::{Error, ErrorContents, ReturnError};
+use crate::error::{Error, ReturnError};
 use crate::http::StatusCode;
 use crate::json::Json;
 

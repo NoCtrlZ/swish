@@ -1,14 +1,10 @@
 use crate::entities::split_slash;
-use crate::json::Json;
 use crate::request::Request;
-use crate::response::Response;
 use crate::router::Route;
 use crate::types::Body;
 
-use serde::{Deserialize, Serialize};
-
 pub fn match_with(req: &mut Request, route: &Route) -> bool {
-    if (route.method == req.method) {
+    if route.method == req.method {
         let pathes = split_slash(&req.path);
         let routes = split_slash(&route.path);
         if pathes.len() == routes.len() {

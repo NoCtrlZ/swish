@@ -1,7 +1,5 @@
 use crate::http::StatusCode;
-use crate::json::Json;
 use crate::request::Request;
-use crate::response::Response;
 use crate::types::Body;
 
 use serde::{Deserialize, Serialize};
@@ -28,21 +26,21 @@ impl ErrorContents {
     }
 }
 
-pub fn is_invalid(req: &Request) -> Box<dyn Body> {
+pub fn is_invalid(_: &Request) -> Box<dyn Body> {
     Box::new(Error(ErrorContents {
         status_code: StatusCode::BadRequest,
         message: "request is not valid".to_string(),
     }))
 }
 
-pub fn is_unauthorized(req: &Request) -> Box<dyn Body> {
+pub fn is_unauthorized(_: &Request) -> Box<dyn Body> {
     Box::new(Error(ErrorContents {
         status_code: StatusCode::Unauthorized,
         message: "header is not accepted".to_string(),
     }))
 }
 
-pub fn is_not_found(req: &Request) -> Box<dyn Body> {
+pub fn is_not_found(_: &Request) -> Box<dyn Body> {
     Box::new(Error(ErrorContents {
         status_code: StatusCode::NotFound,
         message: "page is not found".to_string(),

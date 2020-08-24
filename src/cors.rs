@@ -63,7 +63,6 @@ impl Cors {
             }
             None => return (false, "invalid shaddy request".to_string()),
         }
-        (true, "ok".to_string())
     }
 
     fn validate_headers(&self, req: &Request, headers: &Vec<String>) -> (bool, String) {
