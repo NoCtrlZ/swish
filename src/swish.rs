@@ -8,7 +8,6 @@ use crate::request::{parse, Request};
 use crate::response::{write, Response};
 use crate::router::{Handler, Router};
 
-use std::io::prelude::*;
 use std::net::{TcpListener, TcpStream};
 
 pub struct Swish {
@@ -49,10 +48,11 @@ impl Swish {
         let mut req = parse(stream);
         println!("{:?}", req);
         if self.cors.is_some() {
-            let mut res = self.search(&mut req);
+            let res = self.search(&mut req);
         }
         let mut res = match &self.cors {
             Some(e) => {
+                // todo should be clear the error reason by using msg
                 let (is_valid, msg) = e.validate_request(&req);
                 if is_valid {
                     self.search(&mut req)
@@ -67,7 +67,7 @@ impl Swish {
     }
 
     fn compose(&self, res: &mut Response) -> String {
-        let mut header = format!("Content-Type: {}; {}", res.ctype, self.config.get_charset());
+        let header = format!("Content-Type: {}; {}", res.ctype, self.config.get_charset());
         res.set_header(&header);
         res.compile()
     }

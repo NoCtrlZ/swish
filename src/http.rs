@@ -17,7 +17,6 @@ impl StatusCode {
             &StatusCode::Unauthorized => 401,
             &StatusCode::NotFound => 404,
             &StatusCode::InternalServerError => 500,
-            _ => 500,
         }
     }
 
@@ -28,7 +27,6 @@ impl StatusCode {
             &StatusCode::Unauthorized => "Unauthorized".to_string(),
             &StatusCode::NotFound => "Not Found".to_string(),
             &StatusCode::InternalServerError => "Internal Server Error".to_string(),
-            _ => "Internal Server Error".to_string(),
         }
     }
 
