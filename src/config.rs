@@ -38,7 +38,7 @@ impl Config {
     }
 
     pub fn get_origin(&self) -> String {
-        format!("{}{}", self.address, self.port)
+        format!("{}:{}", self.address, self.port)
     }
 
     pub fn set_char_type(&mut self, char_type: &str) {
