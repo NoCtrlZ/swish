@@ -12,6 +12,13 @@ script = ['''
 cargo test -- --nocapture
 ''']
 
+[tasks.pub]
+description = "Publish Module"
+script = ['''
+#!/usr/bin/env bash
+cargo publish
+''']
+
 [tasks.get1]
 description = "Get /path"
 script = ['''
