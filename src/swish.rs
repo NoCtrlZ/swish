@@ -33,7 +33,7 @@ impl Swish {
         self.router.register(path, Method::POST, handler)
     }
 
-    pub fn set(&mut self, cors: Cors) {
+    pub fn set_cors_as(&mut self, cors: Cors) {
         self.cors = Some(cors)
     }
 
