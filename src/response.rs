@@ -1,4 +1,4 @@
-use crate::config::HeaderConfig;
+use crate::config::Config;
 use crate::http::StatusCode;
 // todo should be in Response body field
 use crate::types::Body;
@@ -12,7 +12,7 @@ pub struct Response {
     pub ctype: String,
     pub header: String,
     pub body: String,
-    pub header_conf: HeaderConfig,
+    pub header_conf: Config,
 }
 
 impl Response {

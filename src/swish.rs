@@ -1,4 +1,4 @@
-use crate::config::HeaderConfig;
+use crate::config::Config;
 use crate::cors::Cors;
 use crate::entities::is_request_url;
 use crate::error::{is_invalid, is_not_found, is_unauthorized};
@@ -12,7 +12,7 @@ use std::net::{TcpListener, TcpStream};
 
 pub struct Swish {
     pub router: Router,
-    pub config: HeaderConfig,
+    pub config: Config,
     pub cors: Option<Cors>,
 }
 
@@ -20,7 +20,7 @@ impl Swish {
     pub fn new() -> Swish {
         Swish {
             router: Router { routes: Vec::new() },
-            config: HeaderConfig::new(),
+            config: Config::new(),
             cors: Default::default(),
         }
     }
@@ -37,8 +37,13 @@ impl Swish {
         self.cors = Some(cors)
     }
 
+    pub fn set_address(&mut self, address: &str) {
+        self.config.set_address(address)
+    }
+
     pub fn bish(&mut self) {
-        let listener = TcpListener::bind("127.0.0.1:3000").expect("fail to bind tcp listener");
+        let listener =
+            TcpListener::bind(self.config.get_origin()).expect("fail to bind tcp listener");
         for stream in listener.incoming() {
             self.handle(&mut stream.expect("fail to read stream"));
         }
