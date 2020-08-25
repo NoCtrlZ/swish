@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use crate::http::Method;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Request {
     pub method: Method,
     pub path: String,
@@ -11,7 +11,7 @@ pub struct Request {
     pub param: Option<String>,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Header {
     pub prefix: String,
     pub elements: HashMap<String, String>,

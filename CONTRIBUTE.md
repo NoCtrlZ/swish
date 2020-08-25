@@ -4,23 +4,17 @@
 - First: Changing without having compatibility.
 - Second: Adding function with having compatibility.
 - Third: Fixing bug with having compatibility.
-## Test
-- [ ] Unit test should be written in each module file.
-- [ ] Integration test should be written in `src/lib.rs`.
 ## Todo
 - [ ] Capacitate user to set contents length limitation.
 - [ ] Support almost status code.
-- [ ] Write unit test and integration test separately.
 - [ ] Box trait dyn should be replaced with enum.
-- [ ] Add method field to router to optimize algorithm.
-- [ ] Return date.
+- [ ] Return date with header.
 - [ ] Matcher should be in router.
-- [ ] Types should be named other name.
 - [ ] Config should be replaced with header.
 - [ ] Validater should be in request module.
-- [ ] Request field param should be Option.
 - [ ] Change name according to clean code.
 - [ ] Error handling all function.
+- [ ] Lifetime optimization, remove clone and copy
 ## Feature
 - [ ] DBMS client.
 - [ ] Mailer client.
