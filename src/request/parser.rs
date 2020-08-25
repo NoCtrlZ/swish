@@ -1,21 +1,19 @@
 use std::collections::HashMap;
 use std::net::TcpStream;
 
-use crate::http::{get_method, Method};
-use crate::request::{Request, Header};
 use crate::entities::convert_buffer_to_string;
+use crate::http::{get_method, Method};
+use crate::request::{Header, Request};
 
 macro_rules! divide_pair {
-    ($c: expr, $m: expr) => {
-        {
-            let mut elements = $c.split_whitespace();
-            let mut pair: [String; 2] = ["".to_string(), "".to_string()];
-            for i in 0..1 {
-                pair[i] = elements.next().expect($m).to_string();
-            }
-            (pair[0].clone(), pair[1].clone())
+    ($c: expr, $m: expr) => {{
+        let mut elements = $c.split_whitespace();
+        let mut pair: [String; 2] = ["".to_string(), "".to_string()];
+        for i in 0..1 {
+            pair[i] = elements.next().expect($m).to_string();
         }
-    };
+        (pair[0].clone(), pair[1].clone())
+    }};
 }
 
 pub fn parse(stream: &mut TcpStream) -> Request {
