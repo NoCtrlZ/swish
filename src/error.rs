@@ -1,22 +1,12 @@
-use crate::body::Body;
+use crate::body::{Body, Error};
 use crate::http::StatusCode;
 use crate::request::Request;
 
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct Error(pub ErrorContents);
-
-#[derive(Debug, Deserialize, Serialize)]
 pub struct ErrorContents {
     pub status_code: StatusCode,
-    pub message: String,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct ReturnError {
-    pub status: bool,
-    pub code: u16,
     pub message: String,
 }
 

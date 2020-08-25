@@ -1,7 +1,7 @@
 use crate::config::Config;
 use crate::cors::Cors;
 use crate::entities::is_request_url;
-use crate::error::{is_invalid, is_not_found, is_unauthorized};
+use crate::error::{is_invalid, is_unauthorized};
 use crate::http::Method;
 use crate::request::{parse, Request};
 use crate::response::{write, Response};
@@ -51,12 +51,9 @@ impl Swish {
     fn handle(&mut self, stream: &mut TcpStream) {
         let mut req = parse(stream);
         println!("{:?}", req);
-        if self.cors.is_some() {
-            let res = self.search(&mut req);
-        }
         let mut res = match &self.cors {
             Some(e) => {
-                // todo should be clear the error reason by using msg
+                // todo should be clear the error reason by using msg, return handler
                 let (is_valid, msg) = e.validate_request(&req);
                 if is_valid {
                     self.search(&mut req)
