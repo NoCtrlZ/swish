@@ -1,9 +1,9 @@
 use crate::error::{Error, ReturnError};
 use crate::http::StatusCode;
-use crate::json::Json;
+use crate::body::json::Json;
 
-use serde::Serialize;
 use serde_json::json;
+use serde::Serialize;
 
 pub trait Body {
     fn status(&self) -> StatusCode;

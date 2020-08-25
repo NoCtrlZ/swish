@@ -13,4 +13,14 @@ do
         rustfmt $file
         git add $file
     fi
+
+    if [ $dir == "router" -a $extension == "rs" ]; then
+        rustfmt $file
+        git add $file
+    fi
+
+    if [ $dir == "body" -a $extension == "rs" ]; then
+        rustfmt $file
+        git add $file
+    fi
 done
