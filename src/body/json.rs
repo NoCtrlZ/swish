@@ -16,7 +16,7 @@ impl<T: Serialize> Body for Json<T> {
         StatusCode::Ok
     }
 
-    fn body(&self) -> String {
+    fn contents(&self) -> String {
         json!(self.0).to_string()
     }
 }

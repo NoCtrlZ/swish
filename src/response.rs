@@ -6,23 +6,23 @@ use crate::body::Body;
 use std::io::prelude::*;
 use std::net::TcpStream;
 
-#[derive(Debug)]
 pub struct Response {
     pub status_code: StatusCode,
     pub ctype: String,
     pub header: String,
-    pub body: String,
+    pub body: Box<dyn Body>,
     pub header_conf: Config,
 }
 
 impl Response {
     pub fn compile(&self) -> String {
         let mut response_data = self.header_conf.get_version();
+        let body = self.body.contents();
         let status_and_body = format!(
             " {}\r\n{}\r\n\r\n{}",
             self.status_code.get_response_prefix(),
-            self.get_basic_header(self.body.len()),
-            self.body
+            self.get_basic_header(body.len()),
+            body
         );
         response_data.push_str(&status_and_body);
         response_data
