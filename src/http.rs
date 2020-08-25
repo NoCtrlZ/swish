@@ -39,7 +39,7 @@ impl StatusCode {
     }
 }
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Hash, Clone)]
 pub enum Method {
     GET,
     POST,
