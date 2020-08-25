@@ -1,13 +1,11 @@
 use std::collections::HashMap;
 
-use crate::body::Body;
 use crate::entities::is_route_url;
 use crate::error::is_not_found;
 use crate::http::Method;
 use crate::request::Request;
 use crate::router::matcher::match_with;
-
-pub type Handler = fn(&Request) -> Box<dyn Body>;
+use crate::router::handler::Handler;
 
 #[derive(Clone)]
 pub struct Route {

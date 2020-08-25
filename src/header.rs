@@ -31,11 +31,11 @@ impl Header {
         )
     }
 
-    pub fn get_contents_type(&self) -> String {
+    fn get_contents_type(&self) -> String {
         format!("Content-Type: {}; {}\r\n", self.ctype, self.char_type)
     }
 
-    pub fn get_content_length(&self, clength: usize) -> String {
+    fn get_content_length(&self, clength: usize) -> String {
         format!("Content-Length: {}\r\n", clength.to_string())
     }
 }
