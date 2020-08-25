@@ -54,6 +54,7 @@ I count the crime I committed. Karma‘s not a liar!
 - [x] Version `0.1.0` Release
 - [x] Integration Test
 - [x] Anti Pattern Test
+- [ ] Integrate Cors, Config And Request, Header
 - [ ] Refactoring According To [Here](https://github.com/NoCtrlZ/swish/blob/master/CONTRIBUTE.md)
 - [ ] Get Method And Path From Attribute
 - [ ] Version `1.0.0` Release

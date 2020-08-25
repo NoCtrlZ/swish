@@ -1,6 +1,6 @@
-use crate::http::StatusCode;
-use crate::error::ErrorContents;
 use crate::body::Body;
+use crate::error::ErrorContents;
+use crate::http::StatusCode;
 
 use serde::{Deserialize, Serialize};
 use serde_json::json;
