@@ -1,7 +1,7 @@
+use crate::body::Body;
 use crate::entities::is_route_url;
 use crate::http::Method;
 use crate::request::Request;
-use crate::types::Body;
 
 pub type Handler = fn(&Request) -> Box<dyn Body>;
 
