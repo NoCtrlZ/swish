@@ -11,7 +11,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "hear_me_roar": "^0.1.6",
+        "hear_me_roar": "^0.1.7",
         "jest": "^26.4.2"
     },
     "devDependencies": {

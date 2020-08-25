@@ -10,7 +10,7 @@ pub struct Request {
     pub path: String,
     pub header: Header,
     pub body: String,
-    pub param: String,
+    pub param: Option<String>,
 }
 
 #[derive(Debug)]
@@ -25,11 +25,11 @@ impl Request {
     }
 
     pub fn set_param(&mut self, param: &str) {
-        self.param = param.to_string();
+        self.param = Some(param.to_string());
     }
 
-    pub fn get_param(self) -> String {
-        self.param
+    pub fn get_param(&self) -> &Option<String> {
+        &self.param
     }
 }
 
@@ -43,7 +43,7 @@ pub fn parse(stream: &mut TcpStream) -> Request {
         path: path,
         header: header,
         body: body,
-        param: "".to_string(),
+        param: Default::default(),
     }
 }
 
