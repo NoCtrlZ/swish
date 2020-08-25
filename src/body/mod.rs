@@ -1,7 +1,7 @@
 mod body;
-mod json;
 mod error;
+mod json;
 
 pub use self::body::Body;
-pub use self::json::Json;
 pub use self::error::Error;
+pub use self::json::Json;
