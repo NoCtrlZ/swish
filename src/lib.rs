@@ -5,7 +5,6 @@ mod entities;
 mod error;
 mod http;
 mod json;
-mod matcher;
 mod request;
 mod response;
 mod router;
