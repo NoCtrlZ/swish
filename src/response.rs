@@ -1,7 +1,7 @@
 use crate::config::Config;
 use crate::http::StatusCode;
 // todo should be in Response body field
-use crate::types::Body;
+use crate::body::Body;
 
 use std::io::prelude::*;
 use std::net::TcpStream;

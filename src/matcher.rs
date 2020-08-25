@@ -1,7 +1,7 @@
+use crate::body::Body;
 use crate::entities::split_slash;
 use crate::request::Request;
 use crate::router::Route;
-use crate::types::Body;
 
 pub fn match_with(req: &mut Request, route: &Route) -> bool {
     if route.method == req.method {

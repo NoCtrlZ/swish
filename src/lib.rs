@@ -1,3 +1,4 @@
+mod body;
 mod config;
 mod cors;
 mod entities;
@@ -9,13 +10,12 @@ mod request;
 mod response;
 mod router;
 mod swish;
-mod types;
 
+pub use crate::body::Body;
 pub use crate::cors::{allow_everything, Cors};
 pub use crate::json::Json;
 pub use crate::request::Request;
 pub use crate::swish::Swish;
-pub use crate::types::Body;
 
 #[cfg(test)]
 mod tests {

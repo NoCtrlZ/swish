@@ -1,6 +1,6 @@
+use crate::body::Body;
 use crate::http::StatusCode;
 use crate::request::Request;
-use crate::types::Body;
 
 use serde::{Deserialize, Serialize};
 
