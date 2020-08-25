@@ -2,6 +2,7 @@ use crate::config::Config;
 use crate::cors::Cors;
 use crate::entities::is_request_url;
 use crate::error::{is_invalid, is_unauthorized};
+use crate::header::compose_header;
 use crate::http::Method;
 use crate::request::{parse, Request};
 use crate::response::{write, Response};
@@ -51,7 +52,7 @@ impl Swish {
     fn handle(&mut self, stream: &mut TcpStream) {
         let mut req = parse(stream);
         println!("{:?}", req);
-        let mut res = match &self.cors {
+        let res = match &self.cors {
             Some(e) => {
                 // todo should be clear the error reason by using msg, return handler
                 let (is_valid, msg) = e.validate_request(&req);
@@ -63,14 +64,8 @@ impl Swish {
             }
             None => self.search(&mut req),
         };
-        let contents = self.compose(&mut res);
+        let contents = res.compile();
         write(&contents, stream)
-    }
-
-    fn compose(&self, res: &mut Response) -> String {
-        let header = format!("Content-Type: {}; {}", res.ctype, self.config.get_charset());
-        res.set_header(&header);
-        res.compile()
     }
 
     fn search(&mut self, req: &mut Request) -> Response {
@@ -85,11 +80,8 @@ impl Swish {
     fn handler_exec(&self, handler: Handler, req: &Request) -> Response {
         let res_contents = (handler)(req);
         Response {
-            status_code: res_contents.status(),
-            ctype: res_contents.content_type(),
-            header: "".to_string(),
+            header: compose_header(res_contents.status(), res_contents.content_type()),
             body: res_contents,
-            header_conf: self.config.clone(),
         }
     }
 }
