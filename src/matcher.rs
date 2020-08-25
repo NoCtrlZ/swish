@@ -37,7 +37,7 @@ pub fn match_with(req: &mut Request, route: &Route) -> bool {
     }
 }
 
-pub fn is_static_route(routes: Vec<String>) -> bool {
+fn is_static_route(routes: Vec<String>) -> bool {
     for path in &routes {
         if path.chars().next().expect("fail to get next char") == ':' {
             return false;
