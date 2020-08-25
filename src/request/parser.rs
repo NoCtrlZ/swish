@@ -1,37 +1,9 @@
 use std::collections::HashMap;
 use std::net::TcpStream;
 
-use crate::entities::convert_buffer_to_string;
 use crate::http::{get_method, Method};
-
-#[derive(Debug)]
-pub struct Request {
-    pub method: Method,
-    pub path: String,
-    pub header: Header,
-    pub body: String,
-    pub param: Option<String>,
-}
-
-#[derive(Debug)]
-pub struct Header {
-    prefix: String,
-    pub elements: HashMap<String, String>,
-}
-
-impl Request {
-    pub fn is_valid(&self) -> bool {
-        self.method != Method::OTHER && self.path != ""
-    }
-
-    pub fn set_param(&mut self, param: &str) {
-        self.param = Some(param.to_string());
-    }
-
-    pub fn get_param(&self) -> &Option<String> {
-        &self.param
-    }
-}
+use crate::request::{Request, Header};
+use crate::entities::convert_buffer_to_string;
 
 pub fn parse(stream: &mut TcpStream) -> Request {
     let req = convert_buffer_to_string(stream);
@@ -52,7 +24,6 @@ fn devide_header_and_body(req: &str) -> (Header, String) {
     if components.len() < 2 {
         panic!("invalid request: body doesn't exist")
     }
-    // println!("{:?}", components);
     (
         convert_header_text_to_struct(&components[0]),
         components[1].clone(),
