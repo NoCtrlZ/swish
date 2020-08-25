@@ -5,7 +5,6 @@ describe('Swish Swish Integration Test', () => {
     it('Static Get Request', async () => {
         const res = await client.get('/path').catch(e => console.log(e))
         const { status, data } = res;
-        console.log(res)
 
         expect(status).toStrictEqual(false);
         expect(data.code).toStrictEqual(401);

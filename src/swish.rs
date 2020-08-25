@@ -19,7 +19,7 @@ pub struct Swish {
 impl Swish {
     pub fn new() -> Swish {
         Swish {
-            router: Router { routes: Vec::new() },
+            router: Router::new(),
             config: Config::new(),
             cors: Default::default(),
         }
@@ -79,7 +79,7 @@ impl Swish {
 
     fn search(&mut self, mut req: &mut Request) -> Response {
         if req.is_valid() && is_request_url(&req.path) {
-            for route in &self.router.routes {
+            for route in &self.router.get_routes(req.method.clone()) {
                 if match_with(&mut req, route) {
                     return self.handler_exec(route.handler, &*req);
                 } else {
