@@ -4,7 +4,7 @@ for file in `git diff --name-only --staged`
 do
     dir=`dirname $file`
     extension=`echo $file | sed 's/^.*\.\([^\.]*\)$/\1/'`
-    if [ $dir == "src" -a $extension == "rs" ]; then
+    if [ $dir == "src/**/*" -a $extension == "rs" ]; then
         rustfmt $file
         git add $file
     fi

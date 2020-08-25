@@ -5,6 +5,19 @@ use crate::http::{get_method, Method};
 use crate::request::{Request, Header};
 use crate::entities::convert_buffer_to_string;
 
+macro_rules! divide_pair {
+    ($c: expr, $m: expr) => {
+        {
+            let mut elements = $c.split_whitespace();
+            let mut pair: [String; 2] = ["".to_string(), "".to_string()];
+            for i in 0..1 {
+                pair[i] = elements.next().expect($m).to_string();
+            }
+            (pair[0].clone(), pair[1].clone())
+        }
+    };
+}
+
 pub fn parse(stream: &mut TcpStream) -> Request {
     let req = convert_buffer_to_string(stream);
     println!("{:?}", req);
@@ -34,16 +47,8 @@ fn convert_header_text_to_struct(header_text: &str) -> Header {
     let components: Vec<String> = header_text.split("\r\n").map(|s| s.to_string()).collect();
     let mut header = HashMap::new();
     for i in 1..components.len() {
-        let mut elements = components[i].split_whitespace();
-        let left = match elements.nth(0) {
-            Some(e) => e.replace(":", ""),
-            None => panic!("method can't be gotten"),
-        };
-        let right = match elements.nth(0) {
-            Some(e) => e,
-            None => "",
-        };
-        header.insert(left, right.to_string());
+        let (left, right) = divide_pair!(components[i], "error happens when parsing header");
+        header.insert(left.to_string(), right.to_string());
     }
     Header {
         prefix: components[0].clone(),
@@ -52,15 +57,6 @@ fn convert_header_text_to_struct(header_text: &str) -> Header {
 }
 
 fn get_method_and_path(req: &str) -> (Method, String) {
-    let mut components = req.split_whitespace();
-
-    let method = match components.nth(0) {
-        Some(e) => get_method(e),
-        None => panic!("method can't be gotten"),
-    };
-    let path = match components.nth(0) {
-        Some(e) => e,
-        None => "",
-    };
-    (method, path.to_string())
+    let (method, path) = divide_pair!(req, "error happens when parsing header prefix");
+    (get_method(&method), path.to_string())
 }
