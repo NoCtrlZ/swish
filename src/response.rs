@@ -1,6 +1,3 @@
-use crate::config::Config;
-use crate::http::StatusCode;
-// todo should be in Response body field
 use crate::body::Body;
 use crate::header::Header;
 
@@ -13,15 +10,12 @@ pub struct Response {
 }
 
 impl Response {
-    pub fn compile(&self) -> String {
+    pub fn send(&self, stream: &mut TcpStream) {
         let body = self.body.contents();
-        format!(" {}\r\n{}", self.header.get_contents(body.len()), body)
+        let contents = format!(" {}\r\n{}", self.header.get_contents(body.len()), body);
+        stream
+            .write(contents.as_bytes())
+            .expect("fail to write bytes");
+        stream.flush().expect("fail to flush stream");
     }
-}
-
-pub fn write(contents: &str, stream: &mut TcpStream) {
-    stream
-        .write(contents.as_bytes())
-        .expect("fail to write bytes");
-    stream.flush().expect("fail to flush stream");
 }

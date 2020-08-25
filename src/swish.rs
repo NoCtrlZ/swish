@@ -5,7 +5,7 @@ use crate::error::{is_invalid, is_unauthorized};
 use crate::header::compose_header;
 use crate::http::Method;
 use crate::request::{parse, Request};
-use crate::response::{write, Response};
+use crate::response::Response;
 use crate::router::{Handler, Router};
 
 use std::net::{TcpListener, TcpStream};
@@ -64,8 +64,7 @@ impl Swish {
             }
             None => self.search(&mut req),
         };
-        let contents = res.compile();
-        write(&contents, stream)
+        res.send(stream);
     }
 
     fn search(&mut self, req: &mut Request) -> Response {

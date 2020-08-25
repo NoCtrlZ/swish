@@ -9,8 +9,6 @@
 - [ ] Support almost status code.
 - [ ] Box trait dyn should be replaced with enum.
 - [ ] Return date with header.
-- [ ] Matcher should be in router.
-- [ ] Config should be replaced with header.
 - [ ] Validater should be in request module.
 - [ ] Change name according to clean code.
 - [ ] Error handling all function.
@@ -21,7 +19,6 @@
 - [ ] DBMS client.
 - [ ] Mailer client.
 ## Refactoring
-- [ ] Change test module structure.
 - [ ] Change directory structure `*.rs -> */mod.rs`.
 ## Bugs
 - [ ] Can't handle root routing.
