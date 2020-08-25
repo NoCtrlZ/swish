@@ -24,7 +24,7 @@ impl Body for Error {
         self.0.get_status_code()
     }
 
-    fn body(&self) -> String {
+    fn contents(&self) -> String {
         json!(ReturnError {
             status: false,
             code: self.0.status_code.get_code_number(),

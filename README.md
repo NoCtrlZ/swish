@@ -23,10 +23,11 @@ fn main() {
 Full Demo Application Is [Here](https://github.com/NoCtrlZ/swish/blob/master/test/server)🎱
 ## Abstract
 ### Three rules🔔
-There are three rules I have when making this web flamework.
+There are three rules when making this web flamework.
+- Don't be complicated
+- Don't implement extra function
 - Don't depend with nightly module
-- Don't have unnecessary modules
-- Don't be heavy
+
 ### What I want to say🏴‍☠️
 Sometime other Rust web flameworks can't be built when it's compiled for production because of `dependencies with nightly modules`. Do we need to be an OSS committer? And we also don't prefer to use left-pad packages. R**ket is about as useful as an old coupon expired! I'd like to say `We are programmer not OSS committer nor fucking copy paster!`
 ## Dependencies Except Std

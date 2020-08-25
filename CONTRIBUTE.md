@@ -16,6 +16,7 @@
 - [ ] Error handling all function.
 - [ ] Lifetime optimization, remove clone and copy.
 - [ ] Error struct should be integrated.
+- [ ] Support query params.
 ## Feature
 - [ ] DBMS client.
 - [ ] Mailer client.
