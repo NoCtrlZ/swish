@@ -14,37 +14,25 @@ impl Cors {
     pub fn validate_request(&self, req: &Request) -> (bool, ReqError) {
         match &self.access_control_allow_origin {
             Some(origin) => {
-                let (is_allowed_origin, msg) = self.validate_origin(&req, origin);
-                if !is_allowed_origin {
-                    return (is_allowed_origin, ReqError::IsNotAllowedOrigin);
-                }
+                return self.validate_origin(&req, origin);
             }
             None => (),
         }
         match &self.access_control_allow_headers {
             Some(headers) => {
-                let (is_allowed_headers, msg) = self.validate_headers(&req, headers);
-                if !is_allowed_headers {
-                    return (is_allowed_headers, ReqError::IsNotAllowedHeader);
-                }
+                return self.validate_headers(&req, headers);
             }
             None => (),
         }
         match &self.access_control_allow_methods {
             Some(methods) => {
-                let (is_allowed_methods, msg) = self.validate_methods(&req, methods);
-                if !is_allowed_methods {
-                    return (is_allowed_methods, ReqError::IsNotAllowedMethod);
-                }
+                return self.validate_methods(&req, methods);
             }
             None => (),
         }
         match &self.access_control_allow_credential {
             Some(credential) => {
-                let (is_allowed_credential, msg) = self.validate_credential(&req, credential);
-                if !is_allowed_credential {
-                    return (is_allowed_credential, ReqError::IsNotAllowedCredential);
-                }
+                return self.validate_credential(&req, credential);
             }
             None => (),
         }
