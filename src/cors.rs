@@ -72,7 +72,7 @@ impl Cors {
         (false, ReqError::IsNotAllowedMethod)
     }
 
-    fn validate_credential(&self, req: &Request, credential: &bool) -> (bool, ReqError) {
+    fn validate_credential(&self, _: &Request, _: &bool) -> (bool, ReqError) {
         (true, ReqError::Empty)
     }
 }
