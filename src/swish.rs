@@ -1,9 +1,8 @@
 use crate::config::Config;
 use crate::cors::Cors;
 use crate::http::Method;
-use crate::request::{parse, Request};
-use crate::response::Response;
-use crate::router::{handler_exec, Handler, Router};
+use crate::request::parse;
+use crate::router::{Handler, Router};
 use crate::validater::{get_error_response, Validater};
 
 use std::net::{TcpListener, TcpStream};
