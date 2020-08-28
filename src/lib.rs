@@ -9,6 +9,7 @@ mod request;
 mod response;
 mod router;
 mod swish;
+mod validater;
 
 pub use crate::body::{Body, Json};
 pub use crate::cors::{allow_everything, Cors};
