@@ -1,6 +1,5 @@
 use crate::config::Config;
 use crate::cors::Cors;
-use crate::entities::is_request_url;
 use crate::error::{is_invalid, is_unauthorized, ReqError};
 use crate::http::Method;
 use crate::request::{parse, Request};
@@ -61,11 +60,7 @@ impl Swish {
     }
 
     fn search(&mut self, req: &mut Request) -> Response {
-        if req.is_valid() && is_request_url(&req.path) {
-            let (handler, req) = self.router.get_handler_and_req(req);
-            handler_exec(handler, &req)
-        } else {
-            handler_exec(is_invalid, &*req)
-        }
+        let (handler, req) = self.router.get_handler_and_req(req);
+        handler_exec(handler, &req)
     }
 }
