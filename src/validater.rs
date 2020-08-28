@@ -1,4 +1,5 @@
 use crate::cors::Cors;
+use crate::error::ReqError;
 use crate::request::Request;
 
 #[derive(Default)]
@@ -11,12 +12,12 @@ impl Validater {
         self.cors = Some(cors)
     }
 
-    pub fn validate_request(&self, req: &Request) -> (bool, String) {
+    pub fn validate_request(&self, req: &Request) -> (bool, ReqError) {
         match &self.cors {
             Some(cors) => {
                 return cors.validate_request(&req);
             }
-            None => (true, "no cors option".to_string()),
+            None => (true, ReqError::Empty),
         }
     }
 }

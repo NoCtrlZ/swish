@@ -4,8 +4,8 @@ use crate::entities::is_route_url;
 use crate::error::is_not_found;
 use crate::http::Method;
 use crate::request::Request;
-use crate::router::matcher::match_with;
 use crate::router::handler::Handler;
+use crate::router::matcher::match_with;
 
 #[derive(Clone)]
 pub struct Route {
