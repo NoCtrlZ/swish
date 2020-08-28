@@ -1,4 +1,4 @@
-use crate::entities::split_slash;
+use crate::router::entities::split_slash;
 use crate::request::Request;
 use crate::router::Route;
 

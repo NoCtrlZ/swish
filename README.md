@@ -30,7 +30,7 @@ There are three rules when making this web flamework.
 
 ### What I want to say🏴‍☠️
 Sometime other Rust web flameworks can't be built when it's compiled for production because of `dependencies with nightly modules`. Do we need to be an OSS committer? And we also don't prefer to use left-pad packages. R**ket is about as useful as an old coupon expired! I'd like to say `We are programmer not OSS committer nor fucking copy paster!`
-## Install
+## Installation
 ```
 [dependencies]
 swish_swish = "0.1.6"
@@ -60,7 +60,7 @@ I count the crime I committed. Karma‘s not a liar!
 - [x] Version `0.1.0` Release
 - [x] Integration Test
 - [x] Anti Pattern Test
-- [ ] Integrate Cors, Config And Request, Header
+- [x] Integrate Cors, Config And Request, Header
 - [ ] Unit Test
 - [ ] Refactoring According To [Here](https://github.com/NoCtrlZ/swish/blob/master/CONTRIBUTE.md)
 - [ ] Get Method And Path From Attribute

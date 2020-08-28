@@ -1,7 +1,7 @@
-use crate::response::Response;
-use crate::http::StatusCode;
 use crate::body::{Body, Error, ValidateError};
 use crate::header::compose_header;
+use crate::http::StatusCode;
+use crate::response::Response;
 
 // #[derive(Debug, PartialEq, Eq)]
 pub enum ReqError {
@@ -26,7 +26,10 @@ pub fn get_error_body(etype: ReqError) -> Box<dyn Body> {
     let status_code = match etype {
         ReqError::IsNotFound => StatusCode::NotFound,
         ReqError::IsInvalid => StatusCode::BadRequest,
-        ReqError::IsNotAllowedOrigin | ReqError::IsNotAllowedHeader | ReqError::IsNotAllowedMethod | ReqError::IsNotAllowedCredential => StatusCode::Unauthorized,
+        ReqError::IsNotAllowedOrigin
+        | ReqError::IsNotAllowedHeader
+        | ReqError::IsNotAllowedMethod
+        | ReqError::IsNotAllowedCredential => StatusCode::Unauthorized,
         _ => StatusCode::Ok,
     };
     let message = match etype {

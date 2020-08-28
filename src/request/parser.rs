@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 use std::net::TcpStream;
 
-use crate::entities::convert_buffer_to_string;
+use crate::request::entities::convert_buffer_to_string;
 use crate::http::{get_method, Method};
 use crate::request::{Header, Request};
 

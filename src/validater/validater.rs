@@ -1,7 +1,7 @@
 use crate::cors::Cors;
-use crate::entities::is_request_url;
-use crate::validater::error::ReqError;
+use crate::validater::entities::is_request_url;
 use crate::request::Request;
+use crate::validater::error::ReqError;
 
 #[derive(Default)]
 pub struct Validater {

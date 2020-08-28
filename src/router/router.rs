@@ -1,12 +1,12 @@
 use std::collections::HashMap;
 
-use crate::entities::is_route_url;
+use crate::router::entities::is_route_url;
 use crate::http::Method;
 use crate::request::Request;
-use crate::router::handler::{Handler, handler_exec};
-use crate::router::matcher::match_with;
 use crate::response::Response;
 use crate::router::error::is_not_found;
+use crate::router::handler::{handler_exec, Handler};
+use crate::router::matcher::match_with;
 
 #[derive(Clone)]
 pub struct Route {
@@ -52,7 +52,7 @@ impl Router {
     fn get_handler_and_req(&self, req: &mut Request) -> (Handler, Request) {
         for route in &self.get_routes(req.method.clone()) {
             if match_with(req, route) {
-                return (route.handler, req.clone())
+                return (route.handler, req.clone());
             } else {
                 continue;
             };

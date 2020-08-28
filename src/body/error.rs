@@ -34,6 +34,7 @@ impl Body for Error {
             status: false,
             status_code: self.0.status_code.get_code_number(),
             message: self.0.message.to_string()
-        }).to_string()
+        })
+        .to_string()
     }
 }

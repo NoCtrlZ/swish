@@ -9,11 +9,9 @@
 - [ ] Support almost status code.
 - [ ] Box trait dyn should be replaced with enum.
 - [ ] Return date with header.
-- [ ] Validater should be in request module.
 - [ ] Change name according to clean code.
 - [ ] Error handling all function.
 - [ ] Lifetime optimization, remove clone and copy.
-- [ ] Error struct should be integrated.
 - [ ] Support query params.
 ## Feature
 - [ ] DBMS client.

@@ -1,7 +1,6 @@
 mod body;
 mod config;
 mod cors;
-mod entities;
 mod header;
 mod http;
 mod request;
