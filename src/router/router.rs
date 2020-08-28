@@ -1,9 +1,9 @@
 use std::collections::HashMap;
 
-use crate::router::entities::is_route_url;
 use crate::http::Method;
 use crate::request::Request;
 use crate::response::Response;
+use crate::router::entities::is_route_url;
 use crate::router::error::is_not_found;
 use crate::router::handler::{handler_exec, Handler};
 use crate::router::matcher::match_with;

@@ -1,8 +1,8 @@
 use std::collections::HashMap;
 use std::net::TcpStream;
 
-use crate::request::entities::convert_buffer_to_string;
 use crate::http::{get_method, Method};
+use crate::request::entities::convert_buffer_to_string;
 use crate::request::{Header, Request};
 
 macro_rules! divide_pair {

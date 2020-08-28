@@ -1,5 +1,5 @@
-use crate::router::entities::split_slash;
 use crate::request::Request;
+use crate::router::entities::split_slash;
 use crate::router::Route;
 
 pub fn match_with(req: &mut Request, route: &Route) -> bool {
