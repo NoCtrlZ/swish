@@ -16,6 +16,16 @@ impl ErrorContents {
     }
 }
 
+pub enum ReqError {
+    Empty,
+    PathIsInvalid,
+    IsNotAllowedOrigin,
+    IsNotAllowedHeader,
+    IsNotAllowedMethod,
+    IsNotAllowedCredential,
+    IsShaddy,
+}
+
 pub fn is_invalid(_: &Request) -> Box<dyn Body> {
     Box::new(Error(ErrorContents {
         status_code: StatusCode::BadRequest,

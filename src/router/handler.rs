@@ -1,7 +1,7 @@
 use crate::body::Body;
+use crate::header::compose_header;
 use crate::request::Request;
 use crate::response::Response;
-use crate::header::compose_header;
 
 pub type Handler = fn(&Request) -> Box<dyn Body>;
 

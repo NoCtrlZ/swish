@@ -1,3 +1,4 @@
+use crate::error::ReqError;
 use crate::http::Method;
 use crate::request::Request;
 
@@ -10,12 +11,12 @@ pub struct Cors {
 }
 
 impl Cors {
-    pub fn validate_request(&self, req: &Request) -> (bool, String) {
+    pub fn validate_request(&self, req: &Request) -> (bool, ReqError) {
         match &self.access_control_allow_origin {
             Some(origin) => {
                 let (is_allowed_origin, msg) = self.validate_origin(&req, origin);
                 if !is_allowed_origin {
-                    return (is_allowed_origin, msg);
+                    return (is_allowed_origin, ReqError::IsNotAllowedOrigin);
                 }
             }
             None => (),
@@ -24,7 +25,7 @@ impl Cors {
             Some(headers) => {
                 let (is_allowed_headers, msg) = self.validate_headers(&req, headers);
                 if !is_allowed_headers {
-                    return (is_allowed_headers, msg);
+                    return (is_allowed_headers, ReqError::IsNotAllowedHeader);
                 }
             }
             None => (),
@@ -33,7 +34,7 @@ impl Cors {
             Some(methods) => {
                 let (is_allowed_methods, msg) = self.validate_methods(&req, methods);
                 if !is_allowed_methods {
-                    return (is_allowed_methods, msg);
+                    return (is_allowed_methods, ReqError::IsNotAllowedMethod);
                 }
             }
             None => (),
@@ -42,49 +43,49 @@ impl Cors {
             Some(credential) => {
                 let (is_allowed_credential, msg) = self.validate_credential(&req, credential);
                 if !is_allowed_credential {
-                    return (is_allowed_credential, msg);
+                    return (is_allowed_credential, ReqError::IsNotAllowedCredential);
                 }
             }
             None => (),
         }
-        (true, "nothing has problem".to_string())
+        (true, ReqError::Empty)
     }
 
     // This should be macro
-    fn validate_origin(&self, req: &Request, origins: &Vec<String>) -> (bool, String) {
+    fn validate_origin(&self, req: &Request, origins: &Vec<String>) -> (bool, ReqError) {
         match req.header.elements.get("Host") {
             Some(origin) => {
                 for allowed_origin in origins {
                     if origin == allowed_origin {
-                        return (true, "ok".to_string());
+                        return (true, ReqError::Empty);
                     }
                 }
-                return (false, "origin is not allowed".to_string());
+                return (false, ReqError::IsNotAllowedOrigin);
             }
-            None => return (false, "invalid shaddy request".to_string()),
+            None => (false, ReqError::IsShaddy),
         }
     }
 
-    fn validate_headers(&self, req: &Request, headers: &Vec<String>) -> (bool, String) {
+    fn validate_headers(&self, req: &Request, headers: &Vec<String>) -> (bool, ReqError) {
         for (header, _) in &req.header.elements {
             if !headers.contains(&header) {
-                return (false, "header is not allowed".to_string());
+                return (false, ReqError::IsNotAllowedHeader);
             }
         }
-        (true, "ok".to_string())
+        (true, ReqError::Empty)
     }
 
-    fn validate_methods(&self, req: &Request, methods: &Vec<Method>) -> (bool, String) {
+    fn validate_methods(&self, req: &Request, methods: &Vec<Method>) -> (bool, ReqError) {
         for allowed_method in methods {
             if &req.method == allowed_method {
-                return (true, "ok".to_string());
+                return (true, ReqError::Empty);
             }
         }
-        (false, "method is not allowed".to_string())
+        (false, ReqError::IsNotAllowedMethod)
     }
 
-    fn validate_credential(&self, req: &Request, credential: &bool) -> (bool, String) {
-        (true, "ok".to_string())
+    fn validate_credential(&self, req: &Request, credential: &bool) -> (bool, ReqError) {
+        (true, ReqError::Empty)
     }
 }
 
