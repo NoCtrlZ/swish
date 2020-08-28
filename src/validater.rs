@@ -1,4 +1,5 @@
 use crate::cors::Cors;
+use crate::entities::is_request_url;
 use crate::error::ReqError;
 use crate::request::Request;
 
@@ -13,11 +14,15 @@ impl Validater {
     }
 
     pub fn validate_request(&self, req: &Request) -> (bool, ReqError) {
-        match &self.cors {
-            Some(cors) => {
-                return cors.validate_request(&req);
+        if req.is_valid() && is_request_url(&req.path) {
+            match &self.cors {
+                Some(cors) => {
+                    return cors.validate_request(&req);
+                }
+                None => (true, ReqError::Empty),
             }
-            None => (true, ReqError::Empty),
+        } else {
+            (false, ReqError::IsInvalid)
         }
     }
 }

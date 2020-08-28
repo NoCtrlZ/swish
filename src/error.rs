@@ -18,7 +18,7 @@ impl ErrorContents {
 
 pub enum ReqError {
     Empty,
-    PathIsInvalid,
+    IsInvalid,
     IsNotAllowedOrigin,
     IsNotAllowedHeader,
     IsNotAllowedMethod,
