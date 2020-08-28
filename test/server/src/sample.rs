@@ -15,9 +15,13 @@ pub fn path_handler(_: &Request) -> Box<dyn Body> {
 }
 
 pub fn user_id_handler(req: &Request) -> Box<dyn Body> {
+    let param = match &req.param {
+        Some(p) => p,
+        None => "",
+    };
     Box::new(Json(Sample {
         code: 200,
-        data: format!("{}{}", "user id is ".to_string(), req.param),
+        data: format!("{}{}", "user id is ".to_string(), param)
     }))
 }
 
