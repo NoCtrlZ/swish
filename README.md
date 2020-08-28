@@ -62,7 +62,7 @@ I count the crime I committed. Karma‘s not a liar!
 - [x] Anti Pattern Test
 - [x] Integrate Cors, Config And Request, Header
 - [x] Refactoring According To [Here](https://github.com/NoCtrlZ/swish/blob/master/CONTRIBUTE.md)
-- [ ] Version `1.0.0` Release
+- [x] Version `1.0.0` Release
 - [ ] Get Method And Path From Attribute
 - [ ] Define All Method And Status Code
 ## Test
