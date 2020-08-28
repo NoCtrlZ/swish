@@ -4,8 +4,9 @@ use crate::entities::is_route_url;
 use crate::error::is_not_found;
 use crate::http::Method;
 use crate::request::Request;
-use crate::router::handler::Handler;
+use crate::router::handler::{Handler, handler_exec};
 use crate::router::matcher::match_with;
+use crate::response::Response;
 
 #[derive(Clone)]
 pub struct Route {
@@ -43,10 +44,15 @@ impl Router {
         self.routes.insert(method.clone(), entries.to_vec());
     }
 
-    pub fn get_handler_and_req(&self, req: &mut Request) -> (Handler, Request) {
+    pub fn get_response(&self, req: &mut Request) -> Response {
+        let (handler, req) = self.get_handler_and_req(req);
+        handler_exec(handler, &req)
+    }
+
+    fn get_handler_and_req(&self, req: &mut Request) -> (Handler, Request) {
         for route in &self.get_routes(req.method.clone()) {
             if match_with(req, route) {
-                return (route.handler, req.clone());
+                return (route.handler, req.clone())
             } else {
                 continue;
             };
