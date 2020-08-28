@@ -9,7 +9,7 @@ macro_rules! divide_pair {
     ($c: expr, $m: expr) => {{
         let mut elements = $c.split_whitespace();
         let mut pair: [String; 2] = ["".to_string(), "".to_string()];
-        for i in 0..1 {
+        for i in 0..2 {
             pair[i] = elements.next().expect($m).to_string();
         }
         (pair[0].clone(), pair[1].clone())

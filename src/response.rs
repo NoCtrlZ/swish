@@ -12,7 +12,7 @@ pub struct Response {
 impl Response {
     pub fn send(&self, stream: &mut TcpStream) {
         let body = self.body.contents();
-        let contents = format!(" {}\r\n{}", self.header.get_contents(body.len()), body);
+        let contents = format!("{}\r\n{}", self.header.get_contents(body.len()), body);
         stream
             .write(contents.as_bytes())
             .expect("fail to write bytes");
