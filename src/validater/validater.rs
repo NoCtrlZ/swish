@@ -1,6 +1,6 @@
 use crate::cors::Cors;
 use crate::entities::is_request_url;
-use crate::error::ReqError;
+use crate::validater::error::ReqError;
 use crate::request::Request;
 
 #[derive(Default)]

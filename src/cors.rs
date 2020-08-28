@@ -1,6 +1,6 @@
-use crate::error::ReqError;
 use crate::http::Method;
 use crate::request::Request;
+use crate::validater::ReqError;
 
 #[derive(Default)]
 pub struct Cors {
@@ -62,7 +62,7 @@ impl Cors {
                 }
                 return (false, ReqError::IsNotAllowedOrigin);
             }
-            None => (false, ReqError::IsShaddy),
+            None => (false, ReqError::IsInvalid),
         }
     }
 
