@@ -18,10 +18,10 @@ pub use crate::swish::Swish;
 mod tests {
     use super::*;
     use serde::{Deserialize, Serialize};
-    #[test]
-    fn start() {
-        swish_swish().bish();
-    }
+    // #[test]
+    // fn start() {
+    //     swish_swish().bish();
+    // }
 
     fn defined_like_this() -> Cors {
         Cors {
