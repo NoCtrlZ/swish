@@ -41,7 +41,7 @@ impl Cors {
 
     // This should be macro
     fn validate_origin(&self, req: &Request, origins: &Vec<String>) -> (bool, ReqError) {
-        match req.header.elements.get("Host") {
+        match req.header.elements.get("Host:") {
             Some(origin) => {
                 for allowed_origin in origins {
                     if origin == allowed_origin {

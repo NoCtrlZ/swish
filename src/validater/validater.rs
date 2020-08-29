@@ -22,6 +22,7 @@ impl Validater {
                 None => (true, ReqError::Empty),
             }
         } else {
+            println!("error here in LL25");
             (false, ReqError::IsInvalid)
         }
     }

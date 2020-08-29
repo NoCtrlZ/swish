@@ -18,17 +18,24 @@ pub use crate::swish::Swish;
 mod tests {
     use super::*;
     use serde::{Deserialize, Serialize};
-    // #[test]
-    // fn start() {
-    //     swish_swish().bish();
-    // }
+    #[test]
+    fn start() {
+        swish_swish().bish();
+    }
+
+    fn defined_like_this() -> Cors {
+        Cors {
+            access_control_allow_origin: Some(["nothing".to_string()].to_vec()),
+            ..Default::default()
+        }
+    }
 
     fn swish_swish() -> Swish {
         let mut swish = Swish::new();
         swish.get("/path", path_handler);
         swish.get("/user/:id", user_id_handler);
         swish.post("/user/register", user_register_handler);
-        swish.set_cors_as(allow_everything());
+        swish.set_cors_as(defined_like_this());
         swish.set_address("0.0.0.0");
         swish
     }

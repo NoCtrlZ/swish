@@ -7,8 +7,8 @@ describe('Swish Swish Integration Test', () => {
         const { status, data } = res;
 
         expect(status).toStrictEqual(false);
-        expect(data.code).toStrictEqual(401);
-        expect(data.message).toStrictEqual('header is not accepted');
+        expect(data.status_code).toStrictEqual(401);
+        expect(data.message).toStrictEqual('origin is not allowed');
     });
 
     it('Dynamic Get Request', async () => {
@@ -16,8 +16,8 @@ describe('Swish Swish Integration Test', () => {
         const { status, data } = res;
 
         expect(status).toStrictEqual(false);
-        expect(data.code).toStrictEqual(401);
-        expect(data.message).toStrictEqual('header is not accepted');
+        expect(data.status_code).toStrictEqual(401);
+        expect(data.message).toStrictEqual('origin is not allowed');
     });
 
     it('Normal Post Request', async () => {
@@ -25,12 +25,11 @@ describe('Swish Swish Integration Test', () => {
             code: 401,
             data: 'hello'
         };
-
         const res = await client.post('/user/register', sample)
         const { status, data } = res;
 
         expect(status).toStrictEqual(false);
-        expect(data.code).toStrictEqual(401);
-        expect(data.message).toStrictEqual('header is not accepted');
+        expect(data.status_code).toStrictEqual(401);
+        expect(data.message).toStrictEqual('origin is not allowed');
     });
 });
