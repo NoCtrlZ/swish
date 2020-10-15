@@ -18,7 +18,7 @@ pub use crate::swish::Swish;
 mod tests {
     use super::*;
     use serde::{Deserialize, Serialize};
-    // #[test]
+    #[test]
     // fn start() {
     //     swish_swish().bish();
     // }

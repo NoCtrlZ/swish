@@ -18,7 +18,8 @@ pub fn match_with(req: &mut Request, route: &Route) -> bool {
                 true
             } else {
                 for n in 0..pathes.len() {
-                    if routes[n].chars().next().expect("fail to get next char") == ':' {
+                    if routes[n] == "/" {
+                    } else if routes[n].chars().next().expect("fail to get next char") == ':' {
                         req.set_param(&pathes[n]);
                         continue;
                     } else if pathes[n] == routes[n] {
@@ -38,12 +39,16 @@ pub fn match_with(req: &mut Request, route: &Route) -> bool {
 }
 
 fn is_static_route(routes: Vec<String>) -> bool {
-    for path in &routes {
-        if path.chars().next().expect("fail to get next char") == ':' {
-            return false;
-        } else {
-            continue;
+    if routes.len() > 0 {
+        for path in &routes {
+            if path.chars().next().expect("fail to get next char") == ':' {
+                return false;
+            } else {
+                continue;
+            }
         }
+        true
+    } else {
+        true
     }
-    true
 }
