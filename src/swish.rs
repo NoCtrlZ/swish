@@ -48,7 +48,7 @@ impl Swish {
 
     fn handle(&mut self, stream: &mut TcpStream) {
         let mut req = parse(stream);
-        println!("{:?}", req);
+        // println!("{:?}", req);
         let (is_valid, req_error) = self.validater.validate_request(&req);
         let res = match is_valid {
             true => self.router.get_response(&mut req),

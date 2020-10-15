@@ -8,7 +8,7 @@ pub fn split_slash(text: &str) -> Vec<String> {
 
 pub fn is_route_url(url: &str) -> bool {
     let url_regex = Regex::new(r"^/[\w]+(/[\w -.!:()])*").expect("fail to new regex");
-    url_regex.is_match(&url)
+    url_regex.is_match(&url) || url == "/"
 }
 
 #[cfg(test)]
@@ -38,7 +38,7 @@ mod tests {
         assert_eq!(res3, false);
         assert_eq!(res4, true);
         assert_eq!(res5, false);
-        assert_eq!(res6, false);
+        assert_eq!(res6, true);
         assert_eq!(res7, false);
     }
 }
