@@ -33,7 +33,7 @@ Sometime other Rust web flameworks can't be built when it's compiled for product
 ## Installation
 ```
 [dependencies]
-swish_swish = "1.0.4"
+swish_swish = "1.0.5"
 ```
 ## Dependencies Except Std
 I count the crime I committed. Karma‘s not a liar!
