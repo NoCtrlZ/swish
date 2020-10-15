@@ -18,7 +18,7 @@ macro_rules! divide_pair {
 
 pub fn parse(stream: &mut TcpStream) -> Request {
     let req = convert_buffer_to_string(stream);
-    println!("{:?}", req);
+    // println!("{:?}", req);
     let (header, body) = devide_header_and_body(&req);
     let (method, path) = get_method_and_path(&header.prefix);
     Request {
