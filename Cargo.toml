@@ -1,6 +1,6 @@
 [package]
 name = "swish_swish"
-version = "1.0.5"
+version = "1.0.6"
 authors = ["NoCtrlZ <phantomofrotten@gmail.com>"]
 description = "Rust Web Framework With No Dependencies With Nightly Modules"
 edition = "2018"
